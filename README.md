@@ -25,7 +25,7 @@
 	- Files expect to be run on-server, so to view the production-build either:
 		- Deploy the `dist/` folder to a hosting provider
 			**-OR-**
-		- Run a http-server in the `dist/` folder
+		- Run a [http-server](https://www.npmjs.com/package/http-server) in the `dist/` folder
 	- Before deployment, make sure the server is configured for an SPA otherwise page navigation will not work
 	- Whitespaces are removed during bundling process
 	- All comments are stripped during bundling process

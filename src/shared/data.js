@@ -1,4 +1,4 @@
-async function fetchWines(parameters, list){
+async function fetchWines(parameters){
 
 	if(parameters){
 
@@ -36,6 +36,19 @@ async function fetchWines(parameters, list){
 		
 	} else return placeholder__wines;
 }//fetchWines
+
+async function fetchWineDetails(id){
+
+	const endpoint = `https://test.wineapp.me/api/v1/wines/${id}`;
+
+	try {
+		const result = await fetch(endpoint).then(response => response.json());
+		return result;
+	} catch(error){
+		console.error(error);
+		return {};
+	}
+}//fetchWineDetails
 
 const placeholder__wines = [
   {
@@ -861,5 +874,6 @@ const placeholder__wines = [
 
 export {
   placeholder__wines,
-  fetchWines
+  fetchWines,
+  fetchWineDetails
 };

@@ -1,6 +1,7 @@
 import React from "react";
+import { getAssetUrl } from "SHARED/utils.js";
 
-export default function WineDetails(){
+export default function WineDetails(props){
 
 
 	/* NOTE:
@@ -12,31 +13,80 @@ export default function WineDetails(){
 
 	*/
 
+	console.error("TODO: refactor using under_score naming convention instead of camelCase");
+
+	const {
+		name: wineName = "",
+		producer       = {},
+		price          = {},
+		media          = [],
+		categories     = [],
+		rebuy_rating,
+		year,
+		quantity,
+		measure,
+		strength,
+		food_matching  = "",
+		tasting_note   = ""
+	} = props;
+
+	const {
+		name: producerName = "",
+		about: about_winemaker
+	} = producer;
+
+	const {
+		actual,
+		original,
+		currency
+	} = price;
+
+	const {
+		public_id
+	} = media[0];
+
+	const headerImageSrc = getAssetUrl(public_id, { w: 1024 });
+
+	//PRICING
+	console.warn("TODO : create a client provider to put regional currency stuff into");
+	//NOTE : this is repeated - might be worth putting some of this in a <Client> provider
+	const currencySystem   = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
+	const price_original   = currencySystem.format(original);
+	const price_discounted = currencySystem.format(actual);
+	const discount         = Math.floor((1 - (actual / original)) * 100);
+
+
+	//TAGS
+	console.warn("TODO: move render maps into their own named functions");
+	const flavourTags = categories.filter(category => category.type == "primary_flavor");
+	const foodTags    = categories.filter(category => category.type == "food_category");
+	const miscTags    = categories.filter(category => category.type != "food_category" && category.type != "primary_flavor");
+
 	return(
 		<article>
 			<header>
 				<div>
 					<h2>
-						Cave Saint Desirat
+						{producerName}
 					</h2>
 					<h1>
-						Syrah
+						{name}
 					</h1>
 					<p aria-label="Current price.">
-						£9.85
+						{price_discounted}
 					</p>
 					<p aria-label="Previous price.">
-						£11.00
+						{price_original}
 					</p>
 				</div>
 				<div>
-					<img src="header_image.jpg" alt="wine name" />
+					<img src={headerImageSrc} alt={`${wineName} by ${producerName}`} />
 					<aside>
 						<p>
-							91% would rebuy
+							{rebuy_rating}% would rebuy
 						</p>
 						<p>
-							10% off
+							{discount}% off
 						</p>
 					</aside>
 				</div>
@@ -49,30 +99,26 @@ export default function WineDetails(){
 				<dl>
 					<div>
 						<dt>Year</dt>
-						<dd>2017</dd>
+						<dd>{year}</dd>
 					</div>
 					<div>
 						<dt>Size</dt>
-						<dd>75cl</dd>
+						<dd>{quantity}{measure}</dd>
 					</div>
 					<div>
 						<dt>
 							<abbr title="Alchol by Volume">ABV</abbr>
 						</dt>
-						<dd>12.5%</dd>
+						<dd>{strength}%</dd>
 					</div>
 				</dl>
 
 				<ul aria-label="Related tags.">
-					<li>
-						France
-					</li>
-					<li>
-						Syrah
-					</li>
-					<li>
-						Medium
-					</li>
+					{miscTags.map(tag => (
+						<li>
+							{tag.name}
+						</li>
+					))}
 				</ul>
 			</section>
 
@@ -81,22 +127,15 @@ export default function WineDetails(){
 					Flavours
 				</h1>
 				<p>
-					A smooth, medium-bodied red with flavours of red fruit, liquorice and cracked pepper. A pure and expressive wine.
+					{tasting_note}
 				</p>
 
 				<ul aria-label="Flavours.">
-					<li>
-						Dark Fruits
-					</li>
-					<li>
-						Peppery
-					</li>
-					<li>
-						Red Berries
-					</li>
-					<li>
-						Liquorice
-					</li>
+					{flavourTags.map(tag => (
+						<li>
+							{tag.name}
+						</li>
+					))}
 				</ul>
 			</section>
 
@@ -105,19 +144,15 @@ export default function WineDetails(){
 					Food Pairing
 				</h1>
 				<p>
-					Paired well with rich meat stews, or a tuna steak.
+					{food_matching}
 				</p>
 
 				<ul aria-label="Good food pairings.">
-					<li>
-						Fish
-					</li>
-					<li>
-						Red Meat
-					</li>
-					<li>
-						White Meat
-					</li>
+					{foodTags.map(tag => (
+						<li>
+							{tag.name}
+						</li>
+					))}
 				</ul>
 			</section>
 
@@ -126,7 +161,7 @@ export default function WineDetails(){
 					About the Winemaker
 				</h1>
 				<p>
-					Founded in 1960, Cave Saint Desirat is located on the terraced vineyards bordering the right bank of the River Rhone, part of the Saint Joseph appellation.  TYheir vineyards tretch over 600 hectares of which all their grapes are picked by hand and pressed into wine with controlled vinification and high-performance equipment.
+					{about_winemaker}
 				</p>
 				<a href="">
 					See more wines from here
@@ -138,7 +173,7 @@ export default function WineDetails(){
 					You may also like
 				</h1>
 				<ol>
-					<li>~~look in the endpoints to see if there's any 'related wines' section~~</li>
+					<li>~~look in the endpoints to see if there's any 'recommended_wines' section~~</li>
 				</ol>
 			</aside>
 

@@ -43,6 +43,8 @@ export default function WineList(){
 		);
 	}//renderWines
 
+	console.log(wines);
+
 	return(
 		<article>
 			<header>

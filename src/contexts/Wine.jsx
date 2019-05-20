@@ -1,9 +1,13 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import { placeholder__wines, fetchWines } from "SHARED/data.js";
+import { placeholder__wines, fetchWines, fetchWineDetails } from "SHARED/data.js";
 import * as ACTIONS from "SHARED/actions.js";
 
 const Wine         = createContext();
 const initialState = {
+	activeWine: {
+		id: "",
+		details: {}
+	},
 	wines: [],
 	filters: {
 		color: "",
@@ -35,6 +39,25 @@ function reducer(state, action){
 					color: value
 				}
 			};
+
+		case ACTIONS.SET_ACTIVE_WINE:
+			return {
+				...state,
+				activeWine: {
+					id: value,
+					details: {}
+				}
+			};
+
+		case ACTIONS.SET_ACTIVE_WINE_DETAILS:
+			return {
+				...state,
+				activeWine: {
+					id: state.activeWine.id,
+					details: value
+				}
+			};
+
 		default:
 			return { ...state };
 	}
@@ -45,11 +68,11 @@ function WineProvider(props){
 
 	//HOOKS
 	//----------------------
-	const [ state, dispatch ] = useReducer(reducer, initialState);
-	const { filters }         = state;
+	const [ state, dispatch ]     = useReducer(reducer, initialState);
+	const { filters, activeWine } = state;
 
-	useEffect(syncWinesByColorFilter, [ filters.color ])
-	// useEffect(updateFilteredWines, [ filters ]);
+	useEffect(syncWinesByColorFilter, [ filters.color ]);
+	useEffect(syncWineDetails, [ activeWine.id ]);
 
 
 	//EFFECT HANDLING
@@ -65,20 +88,32 @@ function WineProvider(props){
 			});
 		}
 	}//syncWinesByColorFilter
+	function syncWineDetails(){
+		if(activeWine.id){
+			updateWineDetails(activeWine.id);
+		}
+	}//syncWineDetails
 
 
 	//UTILS
 	//---------------------
 	async function updateWineList(parameters){
 		const result = await fetchWines(parameters);
-
-		console.log(result)
-
 		dispatch({ 
 			type: ACTIONS.UPDATE_WINES,
 			value: result
 		});
 	}//updateWineList
+	async function updateWineDetails(id){
+		const details = await fetchWineDetails(id);
+
+		console.log(details);
+
+		dispatch({
+			type: ACTIONS.SET_ACTIVE_WINE_DETAILS,
+			value: details
+		})
+	}//updateWineDetails
 
 	
 

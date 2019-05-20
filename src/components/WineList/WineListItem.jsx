@@ -1,12 +1,24 @@
 import React, { useContext } from "react";
 import { Wine } from "CONTEXTS/Wine.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
+import * as ACTIONS from "SHARED/actions.js";
 
 export default function WineListItem(props){
 
 	//HOOKS
 	//----------------------
 	const { state, dispatch } = useContext(Wine);
+
+
+	//EVENT HANDLING
+	//----------------------
+	function showDetails(id){
+		dispatch({
+			type: ACTIONS.SET_ACTIVE_WINE,
+			value: id
+		});
+	}//showDetails
+
 
 	//PRIVATE VARS
 	//---------------------
@@ -15,7 +27,8 @@ export default function WineListItem(props){
 		media: wineMedia = [{}], // (array) of objects containing data needed to request related media
 		producer         = {},   // (object) containing media / information about the wine's producer
 		price: priceData = {},   // (object) containing price value and currency for the wine
-		rebuy_rating     = -1    // (number)[0-100] % of users who have indicated they would buy the wine again
+		rebuy_rating     = -1,   // (number)[0-100] % of users who have indicated they would buy the wine again
+		id                       // (string) unique ID for the wine
 	} = props;
 
 	const {
@@ -44,9 +57,12 @@ export default function WineListItem(props){
 	const price_discounted = currencySystem.format(actual);
 	const discount         = Math.floor((1 - (actual / original)) * 100);
 	
+	//give the event handler the id
+	showDetails            = showDetails.bind(true, id);
+
 
 	return(
-		<li>
+		<li onClick={showDetails}>
 			<figure>
 				<img 
 					src={wineThumbSrc} 

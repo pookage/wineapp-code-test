@@ -8,26 +8,11 @@ export default function WineListRadioFilter(props){
 	//----------------------
 	const { state, dispatch } = useContext(Wine);
 
-	//PRIVATE VARS
-	//----------------------
-	const {
-		filter,
-		value
-	} = props;
-
-	const inputId = `${filter}__${value}`;
-	updateFilter = updateFilter.bind(true, filter);
-
 
 	//EVENT HANDLING
 	//-----------------------
-	function updateFilter(filterKey, event){
-
-		const {
-			value
-		} = event.target;
-
-
+	function updateFilter(filterKey, value){
+		
 		switch(filterKey){
 			case "wine_color":
 				dispatch({
@@ -37,6 +22,17 @@ export default function WineListRadioFilter(props){
 				break;
 		}
 	}//updateFilter
+
+
+	//PRIVATE VARS
+	//----------------------
+	const {
+		filter,
+		value
+	} = props;
+
+	const inputId = `${filter}__${value}`;
+	updateFilter  = updateFilter.bind(true, filter, value);
 
 
 	return(

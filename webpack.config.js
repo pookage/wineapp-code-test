@@ -58,8 +58,10 @@ function buildConfig(env, args){
 
 		//required config options
 		//-------------------------------
-		// entry: ["@babel/polyfill", `${src}/index.js`], //used for async/await but increases bundle size by 80kb
-		entry: `${src}/index.jsx`,
+		entry: [
+			"@babel/polyfill",
+			`${src}/index.jsx`,
+		],
 		output: {
 			filename: "bundle.js",
 			path: dist,
@@ -86,7 +88,8 @@ function buildConfig(env, args){
 								"@babel/preset-react"
 							],
 							plugins: [
-								"@babel/plugin-proposal-throw-expressions"
+								"@babel/plugin-proposal-throw-expressions",
+								
 							]
 						}
 					},

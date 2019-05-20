@@ -3,8 +3,7 @@ import * as ACTIONS from "SHARED/actions.js";
 
 const Router       = createContext();
 const initialState = {
-	page: "home",
-	filters: []
+	page: "home"
 };
 
 function reducer(state, action){

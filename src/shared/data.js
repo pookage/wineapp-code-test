@@ -1,4 +1,4 @@
-async function fetchWines(parameters){
+async function fetchWines(parameters, list){
 
 	if(parameters){
 
@@ -27,7 +27,8 @@ async function fetchWines(parameters){
 				},
 				body: JSON.stringify(parameters)
 			}).then(response => response.json());
-			return results;
+
+			return results.wines;
 		} catch(error) {
 			console.error(error);
 			return [];

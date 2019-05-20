@@ -55,12 +55,15 @@ function WineProvider(props){
 	//EFFECT HANDLING
 	//----------------------
 	function syncWinesByColorFilter(){
-		updateWineList({ 
-			filters: {
-				wine_color: filters.color,
-			},
-			limit: 10
-		});
+
+		if(filters.color){
+			updateWineList({ 
+				filters: {
+					wine_color: filters.color,
+				},
+				limit: 25
+			});
+		}
 	}//syncWinesByColorFilter
 
 
@@ -68,9 +71,12 @@ function WineProvider(props){
 	//---------------------
 	async function updateWineList(parameters){
 		const result = await fetchWines(parameters);
+
+		console.log(result)
+
 		dispatch({ 
 			type: ACTIONS.UPDATE_WINES,
-			value: result.wines
+			value: result
 		});
 	}//updateWineList
 

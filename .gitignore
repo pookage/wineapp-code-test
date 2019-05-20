@@ -1,2 +1,4 @@
 node_modules/
 working_files/
+dist/bundle.js
+dist/index.html

@@ -38,8 +38,12 @@ export default function WineListItem(props){
 	} = priceData;
 
 	
-	const wineThumbSrc = getAssetUrl(public_id, { w: 300 });
-	const price        = new Intl.NumberFormat(navigator.language, { style: "currency", currency }).format(actual);
+	const wineThumbSrc     = getAssetUrl(public_id, { w: 300 });
+	const currencySystem   = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
+	const price_original   = currencySystem.format(original);
+	const price_discounted = currencySystem.format(actual);
+	const discount         = Math.floor((1 - (actual / original)) * 100);
+	
 
 	return(
 		<li>
@@ -60,9 +64,15 @@ export default function WineListItem(props){
 					<p>
 						{rebuy_rating}% would rebuy
 					</p>
-					<p aria-label="Cost per bottle.">
-						{price}
+					<p aria-label="Discounted cost per bottle.">
+						{price_discounted}
 					</p>
+					<p aria-label="Cost per bottle">
+						{price_original}
+					</p>
+					<aside>
+						{discount}% off
+					</aside>
 				</figcaption>
 			</figure>
 		</li>

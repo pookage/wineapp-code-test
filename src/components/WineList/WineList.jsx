@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Wine } from "CONTEXTS/Wine.jsx";
 import { convertToSafeString } from "SHARED/utils.js";
 import WineListItem from "./WineListItem.jsx";
+import WineListRadioFilter from "./WineListRadioFilter.jsx";
 
 
 export default function WineList(){
@@ -14,7 +15,10 @@ export default function WineList(){
 	//------------------------
 	const { wines: wineData } = state;
 	const wines               = wineData.map(renderWines);
+	const hasWines            = wines.length > 0;
 
+
+	// console.log(state)
 
 	//RENDER FUNCTIONS
 	//--------------------------
@@ -48,32 +52,34 @@ export default function WineList(){
 							Colour
 						</legend>
 
-						<div>
-							<label htmlFor="wine_color__red">Red</label>
-							<input id="wine_color__red" type="radio" name="wine_color" value="red" />
-						</div>
-
-						<div>
-							<label htmlFor="wine_color__white">White</label>
-							<input id="wine_color__white" type="radio" name="wine_color" value="white" />
-						</div>
-
-						<div>
-							<label htmlFor="wine_color__rose">Rose</label>
-							<input id="wine_color__rose" type="radio" name="wine_color" value="rose" />
-						</div>
-
-						<div>
-							<label htmlFor="wine_color__sparkling">Sparkling</label>
-							<input id="wine_color__sparkling" type="radio" name="wine_color" value="sparkling" />
-						</div>
-						
+						<WineListRadioFilter 
+							filter="wine_color"
+							value="red"
+						/>
+						<WineListRadioFilter 
+							filter="wine_color"
+							value="white"
+						/>
+						<WineListRadioFilter 
+							filter="wine_color"
+							value="rose"
+						/>
+						<WineListRadioFilter 
+							filter="wine_color"
+							value="sparkling"
+						/>
 					</fieldset>
 				</form>
 			</header>
-			<ol>
-				{wines}
-			</ol>
+			{hasWines ? (
+				<ol>
+					{wines}
+				</ol>
+			) : (
+				<p>
+					Sorry, no wines match those filters!
+				</p>
+			)}
 		</article>
 	);
 

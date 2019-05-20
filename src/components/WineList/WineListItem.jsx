@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Wine } from "CONTEXTS/Wine.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
 
 export default function WineListItem(props){
 
+	//HOOKS
+	//----------------------
+	const { state, dispatch } = useContext(Wine);
+
+	//PRIVATE VARS
+	//---------------------
 	const {
 		name: wineName   = "",   // (string) Human-readable name of the wine
 		media: wineMedia = [{}], // (array) of objects containing data needed to request related media
@@ -37,7 +44,10 @@ export default function WineListItem(props){
 	return(
 		<li>
 			<figure>
-				<img src={wineThumbSrc} alt={`A bottle of ${wineName}`} />
+				<img 
+					src={wineThumbSrc} 
+					alt={`A bottle of ${wineName}`}
+				/>
 				<figcaption>
 					<header>
 						<h2>

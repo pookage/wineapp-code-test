@@ -1,8 +1,13 @@
-async function fetchWines(filters){
+async function fetchWines(parameters){
 
-	if(filters){
+	if(parameters){
 
-		console.log("there's filters")
+		const {
+			filters = {}, // (object) containing top-level filters (see below)
+			sort_by,      // (string)[price_high_low, price_low_high, most_reviewed]
+			page,         // (number)[INT] ???
+			limit         // (number)[INT] 
+		} = parameters;
 
 		const {
 			price_max,          // (number)[INT]
@@ -10,22 +15,25 @@ async function fetchWines(filters){
 			wine_color,         // (string)[red, white, rose, sparkling]
 			include_categories, // (array) of slug strings from the filters endpoint
 			exclude_categories, // (array) of slug strings from the filters endpoint
-			sort_by,            // (string)[price_high_low, price_low_high, most_reviewed]
-			page,               // (number)[INT] ???
-			limit               // (number)[INT] 
-		} = filters;
+		} = filters
 
 		const endpoint = "https://test.wineapp.me/api/v1/wines";
-		const results  = await fetch(endpoint, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(filters)
-		}).then(response => response.json());
 
-		return results;
-	} else return Promise.resolve(placeholder__wines);
+		try {
+			const results  = await fetch(endpoint, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(parameters)
+			}).then(response => response.json());
+			return results;
+		} catch(error) {
+			console.error(error);
+			return [];
+		}
+		
+	} else return placeholder__wines;
 }//fetchWines
 
 const placeholder__wines = [

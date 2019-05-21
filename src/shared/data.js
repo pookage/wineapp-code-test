@@ -43,7 +43,7 @@ async function fetchWineDetails(id){
 
 	try {
 		const result = await fetch(endpoint).then(response => response.json());
-		return result;
+		return result.wine;
 	} catch(error){
 		console.error(error);
 		return {};

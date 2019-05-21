@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import * as ACTIONS from "SHARED/actions.js";
 import { Wine } from "CONTEXTS/Wine.jsx";
+import s from "./WineListRadioFilter.scss";
 
 export default function WineListRadioFilter(props){
 
@@ -34,19 +35,25 @@ export default function WineListRadioFilter(props){
 	const inputId = `${filter}__${value}`;
 	updateFilter  = updateFilter.bind(true, filter, value);
 
+	console.warn("TODO: add icons to the wine filters");
 
 	return(
-		<div>
-			<label htmlFor={inputId}>
-				{value}
-			</label>
-			<input 
+		<div className={s.wrapper}>
+			<input
+				className={s.input} 
 				id={inputId}
 				type="radio" 
 				name={filter}
 				value={value}
 				onChange={updateFilter}
 			/>
+			<label 
+				htmlFor={inputId}
+				className={s.button}>
+				<span className={s.label}>
+					{value}
+				</span>
+			</label>
 		</div>
 	);
 

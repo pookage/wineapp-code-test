@@ -4,6 +4,7 @@ import { convertToSafeString } from "SHARED/utils.js";
 import WineListItem from "./WineListItem.jsx";
 import WineListRadioFilter from "./WineListRadioFilter.jsx";
 import Pagination from "COMPONENTS/Pagination/Pagination.jsx";
+import s from "./WineList.scss";
 
 
 export default function WineList(){
@@ -44,16 +45,11 @@ export default function WineList(){
 		);
 	}//renderWines
 
-	console.log(wines);
-
 	return(
-		<article>
-			<header>
-				<form>
-					<fieldset>
-						<legend>
-							Colour
-						</legend>
+		<article className={s.wrapper}>
+			<header className={s.header}>
+				<form className={s.filters}>
+					<div className={s.colourOptions}>
 
 						<WineListRadioFilter 
 							filter="wine_color"
@@ -71,7 +67,7 @@ export default function WineList(){
 							filter="wine_color"
 							value="sparkling"
 						/>
-					</fieldset>
+					</div>
 				</form>
 			</header>
 			{hasWines ? (

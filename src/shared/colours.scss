@@ -1,0 +1,11 @@
+:root {
+	--color__accent: #b3477f;
+	--color__highlight: #50e3c2;
+	--color__base: #5a5a5a;
+	--color__bold: #2a3a3a;
+	--color__bg: #ffffff;
+}
+
+body {
+	color: var(--color__base);
+}

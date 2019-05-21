@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import s from "./Pagination.scss";
 
 export default function Pagination(props){
+
+	console.warn("TODO: scroll the active page no. to the center of the pagination.");
 
 	//HOOKS
 	//---------------------------
@@ -28,7 +31,7 @@ export default function Pagination(props){
 	//PRIVATE VARS
 	//---------------------------
 	const {
-		maxItems = 25,   // (number) maximum no. of items per page
+		maxItems = 10,   // (number) maximum no. of items per page
 		HTMLTag  = "ol", // (string) which semantic tag should be used for the component wrapper
 		children         // (array) of elements to paginate
 	} = props;
@@ -51,6 +54,7 @@ export default function Pagination(props){
 
 			buttons[i] = (
 				<button
+					className={s.button}
 					onClick={setPage.bind(true, i)}
 					disabled={offset == i}
 					key={`pagination__quick_link__page_${i}`}>
@@ -63,25 +67,29 @@ export default function Pagination(props){
 	}//renderNumberedButtons
 
 	return (
-		<HTMLTag>
+		<HTMLTag className={s.wrapper}>
 			{items}
-			<header>
-				<p>
-					Page {page} of {pages}
-				</p>
-				<nav>
-					<button 
+			<header className={s.navigation}>		
+				<nav className={s.controls}>
+					<button
+						className={`${s.button} ${s.previous}`} 
 						onClick={previousPage}
-						disabled={page == 1}>
-						Previous
-					</button>
-					{renderNumberedButtons()}
-					<button 
+						disabled={page == 1}
+						aria-label="Previous page of results." 
+					/>
+					<div className={s.pageList}>
+						{renderNumberedButtons()}
+					</div>
+					<button
+						className={`${s.button} ${s.next}`} 
 						onClick={nextPage}
-						disabled={page == pages}>
-						Next
-					</button>
+						disabled={page == pages}
+						aria-label="Next page of results."
+					/>
 				</nav>
+				<p className={s.currentPage}>
+					Page <span className={s.number}>{page}</span> of <span className={s.number}>{pages}</span>
+				</p>
 			</header>
 		</HTMLTag>
 	);

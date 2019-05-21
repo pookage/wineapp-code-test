@@ -1,0 +1,54 @@
+.wrapper {
+	text-align: center;
+}
+	.navigation {
+		font-weight: 300;
+	}
+		.controls {
+			display: flex;
+			margin: 1.62em auto 1em;
+		}
+			.button {
+				display: inline-block;	
+				width: 35px;
+				height: 35px;
+				color: var(--color__base);
+				background: transparent;
+				-webkit-appearance: none;
+				-moz-appareance: none;
+				transition: color .3s;
+				&:after {
+					display: inline-block;
+					color: var(--color__highlight);
+					opacity: 1;
+					transition: opacity .3s;
+				}
+				&.next:after {
+					content: ">>";
+					width: 2em;
+				}
+				&.previous:after {
+					content: "<<";
+				}
+				&:disabled {
+					color: var(--color__highlight);
+					&:after {
+						opacity: 0;
+					}
+				}
+				
+			}
+			.pageList {
+				max-width: 50vw;
+				margin: 0 auto;
+				overflow-x: auto;
+				overflow-y: hidden;
+				white-space: nowrap;
+			}
+		.currentPage {
+			text-transform: uppercase;
+			.number {
+				color: var(--color__bold);
+				font-weight: 600;
+			}
+		}

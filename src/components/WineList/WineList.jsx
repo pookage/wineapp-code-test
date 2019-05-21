@@ -3,6 +3,7 @@ import { Wine } from "CONTEXTS/Wine.jsx";
 import { convertToSafeString } from "SHARED/utils.js";
 import WineListItem from "./WineListItem.jsx";
 import WineListRadioFilter from "./WineListRadioFilter.jsx";
+import Pagination from "COMPONENTS/Pagination/Pagination.jsx";
 
 
 export default function WineList(){
@@ -22,7 +23,7 @@ export default function WineList(){
 
 	//RENDER FUNCTIONS
 	//--------------------------
-	function renderWines(details){
+	function renderWines(details, index){
 
 		const {
 			name: wineName = "", // (string) Human-readable name of the wine
@@ -74,9 +75,9 @@ export default function WineList(){
 				</form>
 			</header>
 			{hasWines ? (
-				<ol>
+				<Pagination>
 					{wines}
-				</ol>
+				</Pagination>
 			) : (
 				<p>
 					Sorry, no wines match those filters!

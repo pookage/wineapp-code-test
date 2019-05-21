@@ -1,0 +1,55 @@
+import React, { useState } from "react";
+
+export default function Pagination(props){
+
+	//HOOKS
+	//---------------------------
+	const [ offset, setOffset ] = useState(0);
+
+
+	//EVENT HANDLING
+	//--------------------------
+	function updatePage(direction){
+		setOffset(offset + direction);
+	}//updatePage
+
+
+	//PRIVATE VARS
+	//---------------------------
+	const {
+		maxItems = 10,
+		HTMLTag  = "ol",
+		children
+	} = props;
+
+	const startIndex   = offset * maxItems;
+	const endIndex     = startIndex + maxItems;
+	const items        = children.slice(startIndex, endIndex);
+	const page         = offset + 1;
+	const pages        = Math.ceil(children.length / maxItems);
+	const nextPage     = updatePage.bind(true, +1);
+	const previousPage = updatePage.bind(true, -1);
+
+	return (
+		<HTMLTag>
+			<header>
+				<p>
+					Page {page} of {pages}
+				</p>
+				<nav>
+					<button 
+						onClick={previousPage}
+						disabled={page == 1}>
+						Previous
+					</button>
+					<button 
+						onClick={nextPage}
+						disabled={page == pages}>
+						Next
+					</button>
+				</nav>
+			</header>
+			{items}
+		</HTMLTag>
+	);
+}//Pagination

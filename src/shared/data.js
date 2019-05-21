@@ -1,12 +1,12 @@
-async function fetchWines(parameters){
+async function fetchWines(parameters, list = []){
 
 	if(parameters){
 
 		const {
 			filters = {}, // (object) containing top-level filters (see below)
+			limit = 25,   // (number)[INT] max wine objects to return per request
+			page  = 1,    // (number)[INT] paginated wines as offset by multiples of 'limit'
 			sort_by,      // (string)[price_high_low, price_low_high, most_reviewed]
-			page,         // (number)[INT] ???
-			limit         // (number)[INT] 
 		} = parameters;
 
 		const {
@@ -20,6 +20,8 @@ async function fetchWines(parameters){
 		const endpoint = "https://test.wineapp.me/api/v1/wines";
 
 		try {
+
+			//grab more wines from the endpoint and add them to the list
 			const results  = await fetch(endpoint, {
 				method: "POST",
 				headers: {
@@ -28,13 +30,25 @@ async function fetchWines(parameters){
 				body: JSON.stringify(parameters)
 			}).then(response => response.json());
 
-			return results.wines;
+			const wines = [ ...list, ...results.wines ];
+
+			//keep fetching more wines until there's no more left
+			if(results.wines.length == limit) {
+				return fetchWines({
+					...parameters,
+					page: page+1
+				}, wines);
+			} else return wines;
+
 		} catch(error) {
 			console.error(error);
 			return [];
 		}
 		
-	} else return placeholder__wines;
+	} 
+
+	//if there's no query then assume it's a debug and just return local placeholder data
+	else return placeholder__wines;
 }//fetchWines
 
 async function fetchWineDetails(id){

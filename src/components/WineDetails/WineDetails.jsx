@@ -1,8 +1,14 @@
 import React, { useContext } from "react";
 import { Wine } from "CONTEXTS/Wine.jsx";
 import { Client } from "CONTEXTS/Client.jsx";
+import { Router } from "CONTEXTS/Router.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
+import s from "./WineDetails.scss";
 
+
+console.warn("TODO : create a client provider to put regional currency stuff into");
+console.warn("TODO: refactor using under_score naming convention instead of camelCase");
+console.warn("TODO: move render maps into their own named functions");
 
 export default function WineDetails(props){
 
@@ -18,7 +24,8 @@ export default function WineDetails(props){
 
 	//HOOKS
 	//-------------------------
-	const { state, dispatch }         = useContext(Wine);
+	const { state, dispatch } = useContext(Wine);
+	const { page }            = useContext(Router).state;
 
 	const { 
 		sizeBucket, // (number)[0-4] whate size bucket the user's viewport dimensions fit into
@@ -28,6 +35,8 @@ export default function WineDetails(props){
 	const { 
 		details // (object)
 	} = state.activeWine;
+
+	const isActive = page == "details";
 
 
 	//UTILS
@@ -48,7 +57,7 @@ export default function WineDetails(props){
 
 		//PRIVATE VARS
 		//--------------------------
-		console.warn("TODO: refactor using under_score naming convention instead of camelCase");
+		
 		const {
 			name: wineName = "",
 			producer       = {},
@@ -83,7 +92,6 @@ export default function WineDetails(props){
 		const headerImageSrc  = getAssetUrl(public_id, { w: headerImageSize });
 
 		//PRICING
-		console.warn("TODO : create a client provider to put regional currency stuff into");
 		//NOTE : this is repeated - might be worth putting some of this in a <Client> provider
 		const currencySystem = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
 		const price_original = currencySystem.format(original);
@@ -91,15 +99,13 @@ export default function WineDetails(props){
 		const discounted     = original != null;
 		const discount       = discounted ? Math.floor((1 - (actual / original)) * 100) : 0;
 
-
 		//TAGS
-		console.warn("TODO: move render maps into their own named functions");
 		const flavourTags = categories.filter(category => category.type == "primary_flavor");
 		const foodTags    = categories.filter(category => category.type == "food_category");
 		const miscTags    = categories.filter(category => category.type != "food_category" && category.type != "primary_flavor");
 
 		return(
-			<article>
+			<article className={`${s.wrapper} ${isActive ? s.active : s.inactive}`}>
 				<header>
 					<div>
 						<h2>

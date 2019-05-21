@@ -4,6 +4,8 @@ import { Wine } from "CONTEXTS/Wine.jsx";
 import s from "./WineListRadioFilter.scss";
 import shared from "SHARED/shared.scss";
 
+console.warn("TODO: add icons to the wine filters");
+
 export default function WineListRadioFilter(props){
 
 	//HOOKS
@@ -33,10 +35,11 @@ export default function WineListRadioFilter(props){
 		value
 	} = props;
 
-	const inputId = `${filter}__${value}`;
-	updateFilter  = updateFilter.bind(true, filter, value);
+	const inputId  = `${filter}__${value}`;
 
-	console.warn("TODO: add icons to the wine filters");
+	updateFilter   = updateFilter.bind(true, filter, value);
+
+	
 
 	return(
 		<div className={s.wrapper}>
@@ -47,7 +50,7 @@ export default function WineListRadioFilter(props){
 				name={filter}
 				value={value}
 				onChange={updateFilter}
-				tabindex="0"
+				tabIndex="0"
 			/>
 			<label 
 				htmlFor={inputId}

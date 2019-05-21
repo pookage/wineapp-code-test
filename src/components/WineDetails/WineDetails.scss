@@ -1,0 +1,13 @@
+.wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	//sync with the one in WineList.scss - unify with a manager component later
+	transition: transform .6s .3s var(--easing__ease_in_out_sine);
+	&.active {
+		transform: translateX(0);
+	}
+	&.inactive {
+		transform: translateX(100%);
+	}
+}

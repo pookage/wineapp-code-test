@@ -2,6 +2,16 @@
 	--filters__color__height: 20vw;
 	--wrapper-padding: 1rem;
 	padding: var(--wrapper-padding);
+	transition: transform .6s .3s var(--easing__ease_in_out_sine);
+	&.active {
+		transform: translateX(0);
+	}
+	&.inactive {
+		transform: translateX(-100%);
+		//remove scrollbars
+		max-height: 100%;
+		overflow: hidden;
+	}
 }
 	.header {
 		display: block;

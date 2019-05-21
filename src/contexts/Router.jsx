@@ -3,7 +3,7 @@ import * as ACTIONS from "SHARED/actions.js";
 
 const Router       = createContext();
 const initialState = {
-	page: "home"
+	page: "list"
 };
 
 function reducer(state, action){
@@ -15,6 +15,9 @@ function reducer(state, action){
 
 	switch(type){
 		case ACTIONS.SET_ACTIVE_PAGE:
+
+			console.log("setting page to : ", value);
+
 			return {
 				...state,
 				page: value

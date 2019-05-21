@@ -7,6 +7,7 @@ import WineDetails from "COMPONENTS/WineDetails/WineDetails.jsx";
 import "SHARED/global.scss";
 import "SHARED/fonts.scss";
 import "SHARED/colours.scss";
+import "SHARED/animations.scss";
 
 export default function App(props){
 

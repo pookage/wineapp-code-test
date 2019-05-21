@@ -1,6 +1,5 @@
 import React, { createContext, useReducer, useEffect, useContext } from "react";
 import { placeholder__wines, fetchWines, fetchWineDetails } from "SHARED/data.js";
-import { Router } from "CONTEXTS/Router.jsx";
 import * as ACTIONS from "SHARED/actions.js";
 
 const Wine         = createContext();
@@ -70,7 +69,6 @@ function WineProvider(props){
 	//HOOKS
 	//----------------------
 	const [ state, dispatch ]         = useReducer(reducer, initialState);
-	const { dispatch: dispatchRoute } = useContext(Router);
 	const { filters, activeWine } = state;
 
 	useEffect(syncWinesByColorFilter, [ filters.color ]);
@@ -95,10 +93,10 @@ function WineProvider(props){
 			updateWineDetails(activeWine.id);
 			
 		} else {
-			dispatchRoute({
-				type: ACTIONS.SET_ACTIVE_PAGE,
-				value: "list"
-			});
+			// dispatchRoute({
+			// 	type: ACTIONS.SET_ACTIVE_PAGE,
+			// 	value: "list"
+			// });
 		}
 	}//syncWineDetails
 
@@ -118,11 +116,11 @@ function WineProvider(props){
 		dispatch({
 			type: ACTIONS.SET_ACTIVE_WINE_DETAILS,
 			value: details
-		})
-		dispatchRoute({
-			type: ACTIONS.SET_ACTIVE_PAGE,
-			value: "details"
-		})
+		});
+		// dispatchRoute({
+		// 	type: ACTIONS.SET_ACTIVE_PAGE,
+		// 	value: "details"
+		// });
 	}//updateWineDetails
 
 	

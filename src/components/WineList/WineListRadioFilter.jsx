@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import * as ACTIONS from "SHARED/actions.js";
 import { Wine } from "CONTEXTS/Wine.jsx";
 import s from "./WineListRadioFilter.scss";
@@ -11,6 +11,7 @@ export default function WineListRadioFilter(props){
 	//HOOKS
 	//----------------------
 	const { state, dispatch } = useContext(Wine);
+	const input               = useRef();
 
 
 	//EVENT HANDLING
@@ -25,6 +26,9 @@ export default function WineListRadioFilter(props){
 				});
 				break;
 		}
+
+		input.current.blur();
+		
 	}//updateFilter
 
 
@@ -35,7 +39,12 @@ export default function WineListRadioFilter(props){
 		value
 	} = props;
 
+	const {
+		color
+	} = state.filters;
+
 	const inputId  = `${filter}__${value}`;
+	const checked = color == value;
 
 	updateFilter   = updateFilter.bind(true, filter, value);
 
@@ -51,6 +60,8 @@ export default function WineListRadioFilter(props){
 				value={value}
 				onChange={updateFilter}
 				tabIndex="0"
+				checked={checked}
+				ref={input}
 			/>
 			<label 
 				htmlFor={inputId}

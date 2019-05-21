@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import * as ACTIONS from "SHARED/actions.js";
 import { Wine } from "CONTEXTS/Wine.jsx";
 import { Client } from "CONTEXTS/Client.jsx";
 import { Router } from "CONTEXTS/Router.jsx";
@@ -25,7 +26,7 @@ export default function WineDetails(props){
 	//HOOKS
 	//-------------------------
 	const { state, dispatch } = useContext(Wine);
-	const { page }            = useContext(Router).state;
+	const { state: routerState, dispatch: routerDispatch } = useContext(Router);
 
 	const { 
 		sizeBucket, // (number)[0-4] whate size bucket the user's viewport dimensions fit into
@@ -36,7 +37,7 @@ export default function WineDetails(props){
 		details // (object)
 	} = state.activeWine;
 
-	const isActive = page == "details";
+	const isActive = routerState.page == "details";
 
 
 	//UTILS
@@ -51,6 +52,16 @@ export default function WineDetails(props){
 				return 1024;
 		}
 	}//getHeaderSize
+
+
+	//EVENT HANDLING
+	//-------------------------
+	function backToList(){
+		routerDispatch({
+			type: ACTIONS.SET_ACTIVE_PAGE,
+			value: "list"
+		});
+	}//backToList
 
 
 	if(Object.values(details).length > 0){
@@ -222,6 +233,12 @@ export default function WineDetails(props){
 						<li>~~look in the endpoints to see if there's any 'recommended_wines' section~~</li>
 					</ol>
 				</aside>
+
+				<button
+					className={s.back}
+					onClick={backToList}>
+					Back
+				</button>
 
 			</article>
 		);

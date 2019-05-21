@@ -13,12 +13,12 @@ export default function App(props){
 
 	return(
 		<ClientProvider>
-			<RouterProvider>
-				<WineProvider>
+			<WineProvider>
+				<RouterProvider>
 					<WineList />
 					<WineDetails />
-				</WineProvider>
-			</RouterProvider>
+				</RouterProvider>
+			</WineProvider>
 		</ClientProvider>
 	);
 }//App

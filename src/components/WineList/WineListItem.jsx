@@ -49,9 +49,6 @@ export default function WineListItem(props){
 		original,
 		currency
 	} = priceData;
-
-	console.log(priceData)
-
 	
 	const wineThumbSrc   = getAssetUrl(public_id, { w: 300 });
 	const currencySystem = new Intl.NumberFormat(navigator.language, { style: "currency", currency });

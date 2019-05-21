@@ -18,27 +18,29 @@ async function fetchWines(parameters, list = []){
 		} = filters
 
 		const endpoint = "https://test.wineapp.me/api/v1/wines";
+		const options  = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(parameters)
+		};
 
 		try {
 
 			//grab more wines from the endpoint and add them to the list
-			const results  = await fetch(endpoint, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(parameters)
-			}).then(response => response.json());
+			const results  = await fetch(endpoint, options).then(response => response.json());
+			const wines    = [ ...list, ...results.wines ];
 
-			const wines = [ ...list, ...results.wines ];
-
-			//keep fetching more wines until there's no more left
+			//if there's more wines to fetch, go fetch'em...
 			if(results.wines.length == limit) {
 				return fetchWines({
 					...parameters,
 					page: page+1
 				}, wines);
-			} else return wines;
+			} 
+			//...otherwise just return what we've got
+			else return wines;
 
 		} catch(error) {
 			console.error(error);

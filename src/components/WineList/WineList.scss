@@ -1,10 +1,23 @@
 .wrapper {
-	padding: 1rem;
+	--filters__color__height: 20vw;
+	--wrapper-padding: 1rem;
+	padding: var(--wrapper-padding);
 }
-	.header {}
+	.header {
+		display: block;
+		width: 100%;
+		padding: var(--wrapper-padding);
+		position: fixed;
+		top: 0;
+		left: 0;
+		background-color: var(--color__bg);
+	}
 		.filters {}
 			.colourOptions {
 				display: flex;
 				justify-content: space-between;
 				align-items: flex-start;
 			}
+	.container {
+		padding-top: calc(var(--filters__color__height) * 1.38 + (2 * var(--wrapper-padding)));
+	}

@@ -9,6 +9,8 @@ import s from "./WineList.scss";
 
 export default function WineList(){
 
+	console.warn("TODO: scroll to the top whenever the wine list is updated.");
+
 	//HOOKS
 	//-----------------------
 	const { state, dispatch } = useContext(Wine);
@@ -18,9 +20,6 @@ export default function WineList(){
 	const { wines: wineData } = state;
 	const wines               = wineData.map(renderWines);
 	const hasWines            = wines.length > 0;
-
-
-	// console.log(state)
 
 	//RENDER FUNCTIONS
 	//--------------------------
@@ -70,15 +69,17 @@ export default function WineList(){
 					</div>
 				</form>
 			</header>
-			{hasWines ? (
-				<Pagination>
-					{wines}
-				</Pagination>
-			) : (
-				<p>
-					Sorry, no wines match those filters!
-				</p>
-			)}
+			<div className={s.container}>
+				{hasWines ? (
+					<Pagination>
+						{wines}
+					</Pagination>
+				) : (
+					<p>
+						Sorry, no wines match those filters!
+					</p>
+				)}
+			</div>
 		</article>
 	);
 

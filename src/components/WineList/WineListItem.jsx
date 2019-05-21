@@ -11,8 +11,6 @@ export default function WineListItem(props){
 	const { state, dispatch } = useContext(Wine);
 	const { sizeBucket }      = useContext(Client).state;
 
-	console.log({ sizeBucket });
-
 
 	//EVENT HANDLING
 	//----------------------
@@ -39,6 +37,7 @@ export default function WineListItem(props){
 				return 400;
 		}
 	}//getThumbSize
+
 
 	//PRIVATE VARS
 	//---------------------

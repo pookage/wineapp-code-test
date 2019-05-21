@@ -46,12 +46,14 @@ export default function Pagination(props){
 	//--------------------------
 	function renderNumberedButtons(){
 		const buttons = new Array(pages);
-		
+
 		for(let i = 0; i < pages; i++){
+
 			buttons[i] = (
 				<button
 					onClick={setPage.bind(true, i)}
-					disabled={offset == i}>
+					disabled={offset == i}
+					key={`pagination__quick_link__page_${i}`}>
 					{i + 1}
 				</button>
 			);

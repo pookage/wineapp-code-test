@@ -64,6 +64,7 @@ export default function Pagination(props){
 
 	return (
 		<HTMLTag>
+			{items}
 			<header>
 				<p>
 					Page {page} of {pages}
@@ -82,7 +83,6 @@ export default function Pagination(props){
 					</button>
 				</nav>
 			</header>
-			{items}
 		</HTMLTag>
 	);
 }//Pagination

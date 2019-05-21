@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import * as ACTIONS from "SHARED/actions.js";
 import { Wine } from "CONTEXTS/Wine.jsx";
 import s from "./WineListRadioFilter.scss";
+import shared from "SHARED/shared.scss";
 
 export default function WineListRadioFilter(props){
 
@@ -49,7 +50,7 @@ export default function WineListRadioFilter(props){
 			/>
 			<label 
 				htmlFor={inputId}
-				className={s.button}>
+				className={`${s.button} ${shared.roundedBox}`}>
 				<span className={s.label}>
 					{value}
 				</span>

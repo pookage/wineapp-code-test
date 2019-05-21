@@ -1,5 +1,10 @@
 body {
-	font-size: 16px;
+	font-size: 12px;
+	font-weight: 600;
+}
+h1, h2, h3, p, li, aside {
+	font-size: 1em;
+	line-height: 1.25em;
 }
 
 body, button, input {
@@ -7,6 +12,8 @@ body, button, input {
 }
 
 :root {
-	--font__size__body: 1rem;
+	--font__size__body: 1em;
 	--font__size__label: 0.75rem;
+	--font__size__heading: 2em;
+	--font__size__subheading: 1.75em;
 }

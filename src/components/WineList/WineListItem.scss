@@ -1,0 +1,100 @@
+.wrapper {
+	&+.wrapper {
+		margin-top: 2em;
+	}
+}
+
+	.container {
+		display: flex;
+		height: 125px;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+		.thumb {
+			flex: 0 0 30vw;
+			height: 100%;
+			width: 30vw;
+			overflow: hidden;
+		}
+			.image {
+				display: block;
+				height: 100%;
+				width: 100%;
+				object-position: center;
+				object-fit: cover;
+			}
+		.details {
+			display: grid;
+			flex: 1 1 auto;
+			height: 100%;
+			padding: 1rem;
+			grid-template-columns: auto auto 6ch;
+			grid-template-areas: "names names rebuy" 
+                        		 ". . rebuy" 
+                        		 "prices prices .";
+            position: relative;
+			font-size: 0.62em; //placeholder
+
+		}
+			.names {
+				grid-area: names;
+			}
+				.producer {
+					font-size: var(--font__size__subheading);
+				}
+				.wine {
+					font-size: var(--font__size__heading);
+					max-width: 20ch;
+					margin-top: 0.25em;
+					color: var(--color__bold);
+
+				}
+			.rebuyRating {
+				grid-area: rebuy;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				text-transform: uppercase;
+			}
+				.percentage {
+					font-size: 1.62em;
+					line-height: 1.5em;
+					color: var(--color__accent);
+
+				}
+			.prices {
+				grid-area: prices;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				justify-content: flex-end;
+
+				
+			}
+				.price {
+					&.actual {
+						font-size: var(--font__size__heading);
+					}
+					&.original {
+						font-size: var(--font__size__body);
+						text-decoration: line-through;
+					}
+				}
+			.discount {
+				display: flex;
+				font-size: 1.5em;
+				height: 3.25em;
+				width: 3.25em;
+				position: absolute;
+				bottom: 1em;
+				left: 0;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				text-transform: uppercase;
+				border-radius: 100%;
+				color: var(--color__bg);
+				background-color: var(--color__discount);
+				transform: translateX(-75%);
+			}

@@ -3,6 +3,8 @@ import { Wine } from "CONTEXTS/Wine.jsx";
 import { Client } from "CONTEXTS/Client.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
+import s from "./WineListItem.scss";
+import shared from "SHARED/shared.scss";
 
 export default function WineListItem(props){
 
@@ -83,35 +85,50 @@ export default function WineListItem(props){
 
 
 	return(
-		<li onClick={showDetails}>
-			<figure>
-				<img 
-					src={wineThumbSrc} 
-					alt={`A bottle of ${wineName}`}
-				/>
-				<figcaption>
-					<header>
-						<h2>
+		<li
+			className={`${s.wrapper} ${shared.roundedBox}`} 
+			onClick={showDetails}>
+			<figure className={s.container}>
+				<div className={s.thumb}>
+					<img
+						className={s.image} 
+						src={wineThumbSrc} 
+						alt={`A bottle of ${wineName}`}
+					/>
+				</div>
+				<figcaption className={s.details}>
+					<header className={s.names}>
+						<h2 className={s.producer}>
 							{producerName}
 						</h2>
-						<h1>
+						<h1 className={s.wine}>
 							{wineName}
 						</h1>
 					</header>
-					<p>
-						{rebuy_rating}% would rebuy
+					<p className={s.rebuyRating}>
+						<span className={s.percentage}>
+							{rebuy_rating}%
+						</span>
+						would rebuy
 					</p>
-					<p aria-label="Actual cost per bottle.">
-						{price_actual}
-					</p>
-					{discounted && (
-						<p aria-label="Original cost per bottle">
-							{price_original}
+					<div className={s.prices}>
+						<p  className={`${s.price} ${s.actual}`}
+							aria-label="Actual cost per bottle.">
+							{price_actual}
 						</p>
-					)}
+						{discounted && (
+							<p  className={`${s.price} ${s.original}`} 
+								aria-label="Original cost per bottle">
+								{price_original}
+							</p>
+						)}
+					</div>
 					{discounted && (
-						<aside>
-							{discount}% off
+						<aside className={s.discount}>
+							<span>
+								{discount}%
+							</span>
+							off
 						</aside>
 					)}
 				</figcaption>

@@ -87,7 +87,9 @@ export default function WineListItem(props){
 	return(
 		<li
 			className={`${s.wrapper} ${shared.roundedBox}`} 
-			onClick={showDetails}>
+			onClick={showDetails}
+			aria-label="Read more details."
+			tabindex="0">
 			<figure className={s.container}>
 				<div className={s.thumb}>
 					<img

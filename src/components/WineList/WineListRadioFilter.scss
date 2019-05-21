@@ -15,12 +15,19 @@
 				color: var(--color__accent);
 			}
 		}
+		&:focus {
+			outline: 0;
+			& ~ .button {
+				border-color: var(--color__highlight);	
+			}
+		}
 	}
 	.button {
 		display: block;
 		font-size: var(--filters__color__height); //defined in WineList.scss
 		height: 1.38em;
 		width: 1em;
+		border: 2px solid transparent;
 		transition: box-shadow .3s;
 	}
 		.label {

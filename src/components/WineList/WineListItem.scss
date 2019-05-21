@@ -1,6 +1,15 @@
 .wrapper {
+	border: 2px solid transparent;
+	transition: box-shadow .15s, background-color .15s;
 	&+.wrapper {
 		margin-top: 2em;
+	}
+	&:active,
+	&:focus {
+		border-color: var(--color__highlight);
+		background-color: #f8f8f8;
+		box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.5);
+		outline: 0;
 	}
 }
 
@@ -38,6 +47,7 @@
 		}
 			.names {
 				grid-area: names;
+				text-align: left;
 			}
 				.producer {
 					font-size: var(--font__size__subheading);
@@ -53,7 +63,6 @@
 				grid-area: rebuy;
 				display: flex;
 				flex-direction: column;
-				text-align: center;
 				text-transform: uppercase;
 			}
 				.percentage {
@@ -91,7 +100,6 @@
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				text-align: center;
 				text-transform: uppercase;
 				border-radius: 100%;
 				color: var(--color__bg);

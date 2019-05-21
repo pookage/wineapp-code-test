@@ -36,6 +36,11 @@
 						opacity: 0;
 					}
 				}
+				&:focus {
+					color: var(--color__highlight);
+					border-bottom: 2px solid var(--color__highlight);
+					outline: 0;
+				}
 				
 			}
 			.pageList {

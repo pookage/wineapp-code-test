@@ -47,6 +47,7 @@ export default function WineListRadioFilter(props){
 				name={filter}
 				value={value}
 				onChange={updateFilter}
+				tabindex="0"
 			/>
 			<label 
 				htmlFor={inputId}

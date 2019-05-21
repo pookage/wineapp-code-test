@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Wine } from "CONTEXTS/Wine.jsx";
+import { Client } from "CONTEXTS/Client.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
 
@@ -8,6 +9,9 @@ export default function WineListItem(props){
 	//HOOKS
 	//----------------------
 	const { state, dispatch } = useContext(Wine);
+	const { sizeBucket }      = useContext(Client).state;
+
+	console.log({ sizeBucket });
 
 
 	//EVENT HANDLING
@@ -19,6 +23,22 @@ export default function WineListItem(props){
 		});
 	}//showDetails
 
+
+	//UTILS
+	//----------------------
+	function getThumbSize(bucket){
+		switch(bucket){
+			//mobile
+			case 0:
+				return 125;
+			//tablet
+			case 1:
+				return 300;
+			//desktop
+			default:
+				return 400;
+		}
+	}//getThumbSize
 
 	//PRIVATE VARS
 	//---------------------
@@ -50,7 +70,9 @@ export default function WineListItem(props){
 		currency
 	} = priceData;
 	
-	const wineThumbSrc   = getAssetUrl(public_id, { w: 300 });
+
+	const thumbSize      = getThumbSize(sizeBucket);
+	const wineThumbSrc   = getAssetUrl(public_id, { w: thumbSize });
 	const currencySystem = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
 	const price_original = currencySystem.format(original);
 	const price_actual   = currencySystem.format(actual);

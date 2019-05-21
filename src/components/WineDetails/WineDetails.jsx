@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
-import { getAssetUrl } from "SHARED/utils.js";
 import { Wine } from "CONTEXTS/Wine.jsx";
+import { Client } from "CONTEXTS/Client.jsx";
+import { getAssetUrl } from "SHARED/utils.js";
+
 
 export default function WineDetails(props){
 
@@ -16,8 +18,31 @@ export default function WineDetails(props){
 
 	//HOOKS
 	//-------------------------
-	const { state, dispatch } = useContext(Wine);
-	const { details, id }     = state.activeWine;
+	const { state, dispatch }         = useContext(Wine);
+
+	const { 
+		sizeBucket, // (number)[0-4] whate size bucket the user's viewport dimensions fit into
+		orientation // (string)[landscape, desktop]
+	} = useContext(Client).state;
+
+	const { 
+		details // (object)
+	} = state.activeWine;
+
+
+	//UTILS
+	//-------------------------
+	function getHeaderSize(bucket, orientation){
+		switch(bucket){
+			case 0:
+				return 500;
+			case 1:
+				return orientation == "portrait" ? 768 : 1024;
+			default:
+				return 1024;
+		}
+	}//getHeaderSize
+
 
 	if(Object.values(details).length > 0){
 
@@ -37,7 +62,7 @@ export default function WineDetails(props){
 			strength,
 			food_matching  = "",
 			tasting_note   = ""
-		} = state.activeWine.details;
+		} = details;
 
 		const {
 			name: producerName = "",
@@ -54,7 +79,8 @@ export default function WineDetails(props){
 			public_id
 		} = media[0];
 
-		const headerImageSrc = getAssetUrl(public_id, { w: 1024 });
+		const headerImageSize = getHeaderSize(sizeBucket, orientation);
+		const headerImageSrc  = getAssetUrl(public_id, { w: headerImageSize });
 
 		//PRICING
 		console.warn("TODO : create a client provider to put regional currency stuff into");

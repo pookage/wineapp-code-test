@@ -17,9 +17,9 @@ export default function Pagination(props){
 	//PRIVATE VARS
 	//---------------------------
 	const {
-		maxItems = 10,
-		HTMLTag  = "ol",
-		children
+		maxItems = 10,   // (number) maximum no. of items per page
+		HTMLTag  = "ol", // (string) which semantic tag should be used for the component wrapper
+		children         // (array) of elements to paginate
 	} = props;
 
 	const startIndex   = offset * maxItems;

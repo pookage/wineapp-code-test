@@ -50,15 +50,18 @@ export default function WineListItem(props){
 		currency
 	} = priceData;
 
+	console.log(priceData)
+
 	
-	const wineThumbSrc     = getAssetUrl(public_id, { w: 300 });
-	const currencySystem   = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
-	const price_original   = currencySystem.format(original);
-	const price_discounted = currencySystem.format(actual);
-	const discount         = Math.floor((1 - (actual / original)) * 100);
+	const wineThumbSrc   = getAssetUrl(public_id, { w: 300 });
+	const currencySystem = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
+	const price_original = currencySystem.format(original);
+	const price_actual   = currencySystem.format(actual);
+	const discounted     = original != null;
+	const discount       = discounted ? Math.floor((1 - (actual / original)) * 100) : 0;
 	
 	//give the event handler the id
-	showDetails            = showDetails.bind(true, id);
+	showDetails          = showDetails.bind(true, id);
 
 
 	return(
@@ -80,15 +83,19 @@ export default function WineListItem(props){
 					<p>
 						{rebuy_rating}% would rebuy
 					</p>
-					<p aria-label="Discounted cost per bottle.">
-						{price_discounted}
+					<p aria-label="Actual cost per bottle.">
+						{price_actual}
 					</p>
-					<p aria-label="Cost per bottle">
-						{price_original}
-					</p>
-					<aside>
-						{discount}% off
-					</aside>
+					{discounted && (
+						<p aria-label="Original cost per bottle">
+							{price_original}
+						</p>
+					)}
+					{discounted && (
+						<aside>
+							{discount}% off
+						</aside>
+					)}
 				</figcaption>
 			</figure>
 		</li>

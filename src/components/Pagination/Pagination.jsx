@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Pagination(props){
 
 	//HOOKS
 	//---------------------------
 	const [ offset, setOffset ] = useState(0);
+	useEffect(resetOffset, [ props.children.length ]);
+
+
+	//EFFECT HANDLING
+	//---------------------------
+	function resetOffset(){
+		setOffset(0);
+	}//resetOffset
 
 
 	//EVENT HANDLING
@@ -12,12 +20,15 @@ export default function Pagination(props){
 	function updatePage(direction){
 		setOffset(offset + direction);
 	}//updatePage
+	function setPage(index){
+		setOffset(index);
+	}//setPage
 
 
 	//PRIVATE VARS
 	//---------------------------
 	const {
-		maxItems = 10,   // (number) maximum no. of items per page
+		maxItems = 25,   // (number) maximum no. of items per page
 		HTMLTag  = "ol", // (string) which semantic tag should be used for the component wrapper
 		children         // (array) of elements to paginate
 	} = props;
@@ -29,6 +40,25 @@ export default function Pagination(props){
 	const pages        = Math.ceil(children.length / maxItems);
 	const nextPage     = updatePage.bind(true, +1);
 	const previousPage = updatePage.bind(true, -1);
+
+
+	//RENDER FUNCTIONS
+	//--------------------------
+	function renderNumberedButtons(){
+		const buttons = new Array(pages);
+		
+		for(let i = 0; i < pages; i++){
+			buttons[i] = (
+				<button
+					onClick={setPage.bind(true, i)}
+					disabled={offset == i}>
+					{i + 1}
+				</button>
+			);
+		}
+
+		return buttons;
+	}//renderNumberedButtons
 
 	return (
 		<HTMLTag>
@@ -42,6 +72,7 @@ export default function Pagination(props){
 						disabled={page == 1}>
 						Previous
 					</button>
+					{renderNumberedButtons()}
 					<button 
 						onClick={nextPage}
 						disabled={page == pages}>

@@ -59,10 +59,11 @@ export default function WineDetails(props){
 		//PRICING
 		console.warn("TODO : create a client provider to put regional currency stuff into");
 		//NOTE : this is repeated - might be worth putting some of this in a <Client> provider
-		const currencySystem   = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
-		const price_original   = currencySystem.format(original);
-		const price_discounted = currencySystem.format(actual);
-		const discount         = Math.floor((1 - (actual / original)) * 100);
+		const currencySystem = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
+		const price_original = currencySystem.format(original);
+		const price_actual   = currencySystem.format(actual);
+		const discounted     = original != null;
+		const discount       = discounted ? Math.floor((1 - (actual / original)) * 100) : 0;
 
 
 		//TAGS
@@ -81,12 +82,14 @@ export default function WineDetails(props){
 						<h1>
 							{name}
 						</h1>
-						<p aria-label="Current price.">
-							{price_discounted}
+						<p aria-label="Actual price.">
+							{price_actual}
 						</p>
-						<p aria-label="Previous price.">
-							{price_original}
-						</p>
+						{discounted && (
+							<p aria-label="Previous price.">
+								{price_original}
+							</p>
+						)}
 					</div>
 					<div>
 						<img src={headerImageSrc} alt={`${wineName} by ${producerName}`} />
@@ -94,9 +97,11 @@ export default function WineDetails(props){
 							<p>
 								{rebuy_rating}% would rebuy
 							</p>
-							<p>
-								{discount}% off
-							</p>
+							{discounted && (
+								<p>
+									{discount}% off
+								</p>
+							)}
 						</aside>
 					</div>
 				</header>

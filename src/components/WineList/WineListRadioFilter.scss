@@ -1,8 +1,7 @@
 .wrapper {
 	position: relative;
 	text-align: center;
-}
-	
+}	
 	.input {
 		position: absolute;
 		bottom: 0;
@@ -76,6 +75,15 @@
 				font-size: var(--font__size__label);
 			}
 
+@media(min-width: 768px) and (max-width: 1024px){
+	.wrapper {
+		flex: 1 0 25%;
+		max-width: calc(25% - 1rem);
+	}
+		.button {
+			width: auto;
+		}
+}
 
 @media(min-width: 1025px){
 	.wrapper {

@@ -34,7 +34,7 @@ export default function WineDetails(props){
 
 	//UTILS
 	//-------------------------
-	function getHeaderSize(bucket, orientation){
+	function getHeaderSize(bucket){
 		switch(bucket){
 			case 0:
 				return 500;
@@ -107,6 +107,7 @@ export default function WineDetails(props){
 		const foodTags    = categories.filter(category => category.type == "food_category");
 		const miscTags    = categories.filter(category => category.type != "food_category" && category.type != "primary_flavor");
 
+		const isLandscape = orientation == "landscape";
 
 		//RENDER
 		//---------------------------
@@ -119,6 +120,34 @@ export default function WineDetails(props){
 				</li>
 			);
 		}//renderTag
+		function renderSummary(){
+			return(
+				<div className={s.summary}>
+					<h2 className={`${s.name} ${s.producer}`}>
+						{producerName}
+					</h2>
+					<h1 className={`${s.name} ${s.wine}`}>
+						{wineName}
+					</h1>
+					<div className={s.prices}>
+						<Price
+							className={s.actual} 
+							currency={currency}
+							aria-label="Actual price.">
+							{actual}
+						</Price>
+						{discounted && (
+							<Price
+								className={s.original}
+								currency={currency} 
+								aria-label="Previous price.">
+								{original}
+							</Price>
+						)}
+					</div>
+				</div>
+			);
+		}//renderSummary
 
 		return(
 			<article className={`${s.wrapper} ${loaded ? s.visible : s.hidden}`}>
@@ -129,30 +158,7 @@ export default function WineDetails(props){
 				/>
 				
 				<header className={s.header}>
-					<div className={s.summary}>
-						<h2 className={`${s.name} ${s.producer}`}>
-							{producerName}
-						</h2>
-						<h1 className={`${s.name} ${s.wine}`}>
-							{wineName}
-						</h1>
-						<div className={s.prices}>
-							<Price
-								className={s.actual} 
-								currency={currency}
-								aria-label="Actual price.">
-								{actual}
-							</Price>
-							{discounted && (
-								<Price
-									className={s.original}
-									currency={currency} 
-									aria-label="Previous price.">
-									{original}
-								</Price>
-							)}
-						</div>
-					</div>
+					{(sizeBucket < 2 && !isLandscape) && renderSummary()}
 					<div className={s.hero}>
 						<figure className={s.figure}>
 							<img
@@ -180,6 +186,7 @@ export default function WineDetails(props){
 				</header>
 				
 				<div className={s.info}>
+					{(sizeBucket >= 2 || isLandscape) && renderSummary()}
 					<section className={`${s.section} ${s.wine}`}>
 						<section className={`${s.section} ${s.about}`}>
 							<h1 className={s.title}>
@@ -235,14 +242,16 @@ export default function WineDetails(props){
 						</section>
 					</section>
 
-					<section className={`${s.section}`}>
-						<h1 className={s.title}>
-							About the Winemaker
-						</h1>
-						<p className={s.body}>
-							{winemakerAbout}
-						</p>
-					</section>
+					{winemakerAbout && (
+						<section className={`${s.section}`}>
+							<h1 className={s.title}>
+								About the Winemaker
+							</h1>
+							<p className={s.body}>
+								{winemakerAbout}
+							</p>
+						</section>
+					)}
 				</div>
 
 			</article>

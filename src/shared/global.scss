@@ -8,3 +8,9 @@
 :root {
 	--wrapper-padding: 1rem;
 }
+
+@media(min-width: 768px){
+	:root {
+		--wrapper-padding: 2rem;
+	}
+}

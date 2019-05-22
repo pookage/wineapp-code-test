@@ -12,6 +12,7 @@ import s from "./WineDetails.scss";
 
 console.warn("TODO: trap the tab in the details page when active");
 console.warn("TODO: replicate the parallax on the scroll.")
+console.warn("TODO: add highligts bar over back button on scroll to provide contrast.")
 
 export default function WineDetails(props){
 
@@ -38,7 +39,7 @@ export default function WineDetails(props){
 			case 0:
 				return 500;
 			case 1:
-				return orientation == "portrait" ? 768 : 1024;
+				return 768;
 			default:
 				return 1024;
 		}

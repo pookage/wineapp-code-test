@@ -17,17 +17,17 @@
 				-webkit-appearance: none;
 				-moz-appareance: none;
 				transition: color .3s;
-				&:after {
+				&::after {
 					display: inline-block;
 					color: var(--color__highlight);
 					opacity: 1;
 					transition: opacity .3s;
 				}
-				&.next:after {
+				&.next::after {
 					content: ">>";
 					width: 2em;
 				}
-				&.previous:after {
+				&.previous::after {
 					content: "<<";
 				}
 				&:disabled {

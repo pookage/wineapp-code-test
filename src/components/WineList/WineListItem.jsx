@@ -15,7 +15,7 @@ export default function WineListItem(props){
 	//HOOKS
 	//----------------------
 	const { state, dispatch: dispatchWine } = useContext(Wine);
-	const { sizeBucket }                    = useContext(Client).state;
+	const { sizeBucket, orientation }       = useContext(Client).state;
 	const { dispatch: dispatchRouter }      = useContext(Router);
 	const [ loaded, setLoaded ]             = useState(false);
 
@@ -44,7 +44,7 @@ export default function WineListItem(props){
 		switch(bucket){
 			//mobile
 			case 0:
-				return 125;
+				return orientation == "portrait" ? 125 : 225;
 			//tablet
 			case 1:
 				return 300;

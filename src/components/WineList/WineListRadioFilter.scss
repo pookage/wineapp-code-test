@@ -33,7 +33,7 @@
 		align-items: center;
 		justify-content: flex-end;
 		transition: box-shadow .3s;
-		&:before {
+		&::before {
 			content: "";
 			display: block;
 			width: 100%;
@@ -42,16 +42,16 @@
 			background-position: center bottom;
 			background-repeat: no-repeat;
 		}
-		&.glass_red:before {
+		&.glass_red::before {
 			background-image: url("assets/red-wine-glass.svg");
 		}
-		&.glass_white:before {
+		&.glass_white::before {
 			background-image: url("assets/white-wine-glass.svg");
 		}
-		&.glass_rose:before {
+		&.glass_rose::before {
 			background-image: url("assets/rose-wine-glass.svg");
 		}
-		&.glass_sparkling:before {
+		&.glass_sparkling::before {
 			background-image: url("assets/sparkling-wine-glass.svg");
 		}
 		

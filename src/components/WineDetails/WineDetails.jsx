@@ -178,69 +178,71 @@ export default function WineDetails(props){
 					</div>
 				</header>
 				
-				<section className={`${s.section} ${s.wine}`}>
-					<section className={`${s.section} ${s.about}`}>
-						<h1 className={s.title}>
-							About this wine
-						</h1>
-						<dl className={s.details}>
-							<div className={s.property}>
-								<dt className={s.key}>Year</dt>
-								<dd className={s.value}>{year}</dd>
-							</div>
-							<div className={s.property}>
-								<dt className={s.key}>Size</dt>
-								<dd className={s.value}>{quantity}{measure}</dd>
-							</div>
-							<div className={s.property}>
-								<dt className={s.key}>
-									<abbr title="Alchol by Volume">ABV</abbr>
-								</dt>
-								<dd className={s.value}>{strength}%</dd>
-							</div>
-						</dl>
+				<div className={s.info}>
+					<section className={`${s.section} ${s.wine}`}>
+						<section className={`${s.section} ${s.about}`}>
+							<h1 className={s.title}>
+								About this wine
+							</h1>
+							<dl className={s.details}>
+								<div className={s.property}>
+									<dt className={s.key}>Year</dt>
+									<dd className={s.value}>{year}</dd>
+								</div>
+								<div className={s.property}>
+									<dt className={s.key}>Size</dt>
+									<dd className={s.value}>{quantity}{measure}</dd>
+								</div>
+								<div className={s.property}>
+									<dt className={s.key}>
+										<abbr title="Alchol by Volume">ABV</abbr>
+									</dt>
+									<dd className={s.value}>{strength}%</dd>
+								</div>
+							</dl>
 
-						<ul className={s.tags} 
-							aria-label="Related tags.">
-							{miscTags.map(renderTag)}
-						</ul>
+							<ul className={s.tags} 
+								aria-label="Related tags.">
+								{miscTags.map(renderTag)}
+							</ul>
+						</section>
+
+						<section className={`${s.section} ${s.flavours}`}>
+							<h1 className={s.title}>
+								Flavours
+							</h1>
+							<p className={s.body}>
+								{tasting_note}
+							</p>
+							<ul className={s.tags}
+								aria-label="Flavours.">
+								{flavourTags.map(renderTag)}
+							</ul>
+						</section>
+
+						<section className={`${s.section} ${s.foodPairing}`}>
+							<h1 className={s.title}>
+								Food Pairing
+							</h1>
+							<p className={s.body}>
+								{food_matching}
+							</p>
+							<ul className={s.tags}
+								aria-label="Good food pairings.">
+								{foodTags.map(renderTag)}
+							</ul>
+						</section>
 					</section>
 
-					<section className={`${s.section} ${s.flavours}`}>
+					<section className={`${s.section}`}>
 						<h1 className={s.title}>
-							Flavours
+							About the Winemaker
 						</h1>
 						<p className={s.body}>
-							{tasting_note}
+							{winemakerAbout}
 						</p>
-						<ul className={s.tags}
-							aria-label="Flavours.">
-							{flavourTags.map(renderTag)}
-						</ul>
 					</section>
-
-					<section className={`${s.section} ${s.foodPairing}`}>
-						<h1 className={s.title}>
-							Food Pairing
-						</h1>
-						<p className={s.body}>
-							{food_matching}
-						</p>
-						<ul className={s.tags}
-							aria-label="Good food pairings.">
-							{foodTags.map(renderTag)}
-						</ul>
-					</section>
-				</section>
-
-				<section className={`${s.section} ${s.winemaker}`}>
-					<h1 className={s.title}>
-						About the Winemaker
-					</h1>
-					<p className={s.body}>
-						{winemakerAbout}
-					</p>
-				</section>
+				</div>
 
 			</article>
 		);

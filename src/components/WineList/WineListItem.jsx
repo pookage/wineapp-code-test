@@ -23,9 +23,6 @@ export default function WineListItem(props){
 	//EVENT HANDLING
 	//----------------------
 	function showDetails(id){
-
-		console.log("set wine ID to : ", id);
-
 		dispatchWine({
 			type: ACTIONS.SET_ACTIVE_WINE,
 			value: id
@@ -35,6 +32,7 @@ export default function WineListItem(props){
 			value: "details"
 		});
 	}//showDetails
+	
 	function reveal(){
 		setLoaded(true);
 	}//reveal

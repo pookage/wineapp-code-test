@@ -4,8 +4,6 @@ import { Wine } from "CONTEXTS/Wine.jsx";
 import s from "./WineListRadioFilter.scss";
 import shared from "SHARED/shared.scss";
 
-console.warn("TODO: add icons to the wine filters");
-
 export default function WineListRadioFilter(props){
 
 	//HOOKS

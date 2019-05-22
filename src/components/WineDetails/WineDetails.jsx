@@ -9,8 +9,7 @@ import DiscountSticker from "COMPONENTS/DiscountSticker/DiscountSticker.jsx";
 import RebuyMeter from "COMPONENTS/RebuyMeter/RebuyMeter.jsx";
 import s from "./WineDetails.scss";
 
-console.warn("TODO: refactor using under_score naming convention instead of camelCase");
-console.warn("TODO: move render maps into their own named functions");
+
 console.warn("TODO: trap the tab in the details page when active");
 console.warn("TODO: replicate the parallax on the scroll.")
 
@@ -82,7 +81,7 @@ export default function WineDetails(props){
 
 		const {
 			name: producerName = "",
-			about: about_winemaker
+			about: winemakerAbout = ""
 		} = producer;
 
 		const {
@@ -239,7 +238,7 @@ export default function WineDetails(props){
 						About the Winemaker
 					</h1>
 					<p className={s.body}>
-						{about_winemaker}
+						{winemakerAbout}
 					</p>
 				</section>
 

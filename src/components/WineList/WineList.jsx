@@ -6,9 +6,6 @@ import WineListRadioFilter from "./WineListRadioFilter.jsx";
 import Pagination from "COMPONENTS/Pagination/Pagination.jsx";
 import s from "./WineList.scss";
 
-console.warn("TODO: scroll to the top whenever the wine list is updated.");
-console.warn("TODO: create a component to handle the slide in/out state of the list");
-
 export default function WineList(){
 
 	//HOOKS

@@ -65,7 +65,7 @@ export default function WineListRadioFilter(props){
 			/>
 			<label 
 				htmlFor={inputId}
-				className={`${s.button} ${shared.roundedBox}`}>
+				className={`${s.button} ${shared.roundedBox} ${s[`glass_${value}`]}`}>
 				<span className={s.label}>
 					<span className={s.text}>
 						{value}

@@ -54,31 +54,21 @@
 				}
 				.wine {
 					font-size: var(--font__size__heading);
-					max-width: 20ch;
+					max-width: 18ch;
 					margin-top: 0.25em;
 					color: var(--color__bold);
 
 				}
 			.rebuyRating {
 				grid-area: rebuy;
-				display: flex;
-				flex-direction: column;
-				text-transform: uppercase;
 			}
-				.percentage {
-					font-size: 1.62em;
-					line-height: 1.5em;
-					color: var(--color__accent);
-
-				}
+				
 			.prices {
 				grid-area: prices;
 				display: flex;
 				flex-direction: column;
 				align-items: flex-start;
-				justify-content: flex-end;
-
-				
+				justify-content: flex-end;		
 			}
 				.price {
 					&.actual {

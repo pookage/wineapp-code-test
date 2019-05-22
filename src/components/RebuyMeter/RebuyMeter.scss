@@ -4,13 +4,14 @@
 	align-items: center;
 	text-transform: uppercase;
 	text-align: center;
+	font-weight: 900;
 }
 	.percentage {
 		display: flex;
 		font-size: 1.5em;
 		height: 3em;
 		width: 3em;
-		border: 0.3ch solid var(--color__accent);
+		border: 0.35ch solid var(--color__accent);
 		margin-bottom: 0.25em;
 		justify-content: center;
 		align-items: center;
@@ -18,5 +19,6 @@
 		color: var(--color__accent);
 	}
 	.label {
-		max-width: 6ch;
+		max-width: 7ch;
+		letter-spacing: 0.1em
 	}

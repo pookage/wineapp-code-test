@@ -34,6 +34,21 @@
 				top: 0;
 				left: 0;
 			}
+				.rebuyRating {
+					font-size: var(--font__size__label);
+					position: absolute;
+					top: var(--wrapper-padding);
+					right: var(--wrapper-padding);
+					color: var(--color__bg);
+					span {
+						border-color: var(--color__bg);
+						color: var(--color__bg);
+					}
+				}
+
+				.discount {
+					font-size: var(--font__size__subheading);
+				}
 		.summary {
 			order: 2;
 		}

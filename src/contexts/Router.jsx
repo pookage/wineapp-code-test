@@ -4,6 +4,7 @@ import { getUrlParams } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
 
 console.warn("TODO: handle unknown values for the id / filters if the user changes them.");
+console.warn("TODO: add swipe support to navigate to/from details page");
 
 const Router       = createContext();
 const initialState = {

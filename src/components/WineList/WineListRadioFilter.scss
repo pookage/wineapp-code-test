@@ -32,8 +32,10 @@
 	}
 		.label {
 			color: var(--color__bold);
-			font-size: var(--font__size__label);
+			font-size: var(--font__size__reset);
 			font-weight: 600;
 			text-transform: capitalize;
-
 		}
+			.text {
+				font-size: var(--font__size__label);
+			}

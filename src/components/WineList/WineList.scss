@@ -1,7 +1,6 @@
 .wrapper {
 	--filters__color__height: 20vw;
-	--wrapper-padding: 1rem;
-	padding: var(--wrapper-padding);
+	padding: var(--wrapper-padding); //defined in global
 	position: relative;
 }
 	.header {

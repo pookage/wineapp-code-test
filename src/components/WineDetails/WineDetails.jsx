@@ -138,12 +138,14 @@ export default function WineDetails(props){
 							/>
 						</figure>
 						<aside className={s.sellingPoints}>
-							<RebuyMeter 
+							<RebuyMeter
+								className={s.rebuyRating} 
 								HTMLTag="p"
 								percentage={rebuy_rating} 
 							/>
 							{discounted && (
-								<DiscountSticker 
+								<DiscountSticker
+									className={s.discount} 
 									HTMLTag="p"
 									discount={discount} 
 								/>

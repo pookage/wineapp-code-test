@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Wine } from "CONTEXTS/Wine.jsx";
 import { Router } from "CONTEXTS/Router.jsx";
 import { Client } from "CONTEXTS/Client.jsx";
@@ -17,6 +17,7 @@ export default function WineListItem(props){
 	const { state, dispatch: dispatchWine } = useContext(Wine);
 	const { sizeBucket }                    = useContext(Client).state;
 	const { dispatch: dispatchRouter }      = useContext(Router);
+	const [ loaded, setLoaded ]             = useState(false);
 
 
 	//EVENT HANDLING
@@ -34,6 +35,9 @@ export default function WineListItem(props){
 			value: "details"
 		});
 	}//showDetails
+	function reveal(){
+		setLoaded(true);
+	}//reveal
 
 
 	//UTILS
@@ -95,7 +99,7 @@ export default function WineListItem(props){
 
 	return(
 		<li
-			className={`${s.wrapper} ${shared.roundedBox}`} 
+			className={`${s.wrapper} ${shared.roundedBox} ${loaded ? s.visible : s.hidden}`} 
 			onClick={showDetails}
 			aria-label="Read more details."
 			tabIndex="0">
@@ -105,6 +109,7 @@ export default function WineListItem(props){
 						className={s.image} 
 						src={wineThumbSrc} 
 						alt={`A bottle of ${wineName}`}
+						onLoad={reveal}
 					/>
 				</div>
 				<figcaption className={s.details}>

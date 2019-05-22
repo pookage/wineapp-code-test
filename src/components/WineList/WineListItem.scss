@@ -1,6 +1,6 @@
 .wrapper {
 	border: 2px solid transparent;
-	transition: box-shadow .15s, background-color .15s;
+	transition: box-shadow .15s, background-color .15s, opacity .3s;
 	&+.wrapper {
 		margin-top: 2em;
 	}
@@ -10,6 +10,12 @@
 		background-color: #f8f8f8;
 		box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.5);
 		outline: 0;
+	}
+	&.visible {
+		opacity: 1;
+	}
+	&.hidden {
+		opacity: 0;
 	}
 }
 

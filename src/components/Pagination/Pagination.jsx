@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { PageSwapper } from "CONTEXTS/PageSwapper.jsx";
 import s from "./Pagination.scss";
 
 export default function Pagination(props){
@@ -7,8 +8,10 @@ export default function Pagination(props){
 
 	//HOOKS
 	//---------------------------
-	const [ offset, setOffset ] = useState(0);
+	const [ offset, setOffset ]   = useState(0);
+	const { wrapper: pageWrapper} = useContext(PageSwapper);
 	useEffect(resetOffset, [ props.children.length ]);
+	useEffect(scrollToTop, [ offset ]);
 
 
 	//EFFECT HANDLING
@@ -16,6 +19,12 @@ export default function Pagination(props){
 	function resetOffset(){
 		setOffset(0);
 	}//resetOffset
+	function scrollToTop(){
+		pageWrapper.current.scrollTo({
+			top: 0,
+			behavior: "smooth"
+		});
+	}//scrollToTop	
 
 
 	//EVENT HANDLING

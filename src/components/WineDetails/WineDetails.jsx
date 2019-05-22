@@ -25,8 +25,8 @@ export default function WineDetails(props){
 
 	//HOOKS
 	//-------------------------
-	const { state, dispatch } = useContext(Wine);
-	const { state: routerState, dispatch: routerDispatch } = useContext(Router);
+	const { state, dispatch: dispatchWine } = useContext(Wine);
+	const { dispatch: dispatchRouter }      = useContext(Router);
 
 	const { 
 		sizeBucket, // (number)[0-4] whate size bucket the user's viewport dimensions fit into
@@ -36,8 +36,6 @@ export default function WineDetails(props){
 	const { 
 		details // (object)
 	} = state.activeWine;
-
-	const isActive = routerState.page == "details";
 
 
 	//UTILS
@@ -57,7 +55,12 @@ export default function WineDetails(props){
 	//EVENT HANDLING
 	//-------------------------
 	function backToList(){
-		routerDispatch({
+		// dispatchWine({
+		// 	type: ACTIONS.SET_ACTIVE_WINE,
+		// 	value: ""
+		// });
+
+		dispatchRouter({
 			type: ACTIONS.SET_ACTIVE_PAGE,
 			value: "list"
 		});
@@ -116,7 +119,7 @@ export default function WineDetails(props){
 		const miscTags    = categories.filter(category => category.type != "food_category" && category.type != "primary_flavor");
 
 		return(
-			<article className={`${s.wrapper} ${isActive ? s.active : s.inactive}`}>
+			<article className={`${s.wrapper}`}>
 				<header>
 					<div>
 						<h2>

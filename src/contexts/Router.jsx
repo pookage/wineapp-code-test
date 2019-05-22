@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useReducer, useEffect } from "react";
 import { Wine } from "CONTEXTS/Wine.jsx";
+import { getUrlParams } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
 
-console.warn("TODO: update useEffects to listen for more than just colour changes");
 console.warn("TODO: handle unknown values for the id / filters if the user changes them.");
 
 const Router       = createContext();
@@ -19,9 +19,6 @@ function reducer(state, action){
 
 	switch(type){
 		case ACTIONS.SET_ACTIVE_PAGE:
-
-			console.log("setting page to : ", value);
-
 			return {
 				...state,
 				page: value
@@ -38,28 +35,21 @@ function RouterProvider(props){
 	//HOOKS
 	//--------------------
 	const [ state, dispatch ] = useReducer(reducer, initialState);
-	const { 
-		state: wineState, 
-		dispatch: dispatchWine 
-	} = useContext(Wine);
+	const { state: wineState, dispatch: dispatchWine } = useContext(Wine);
 	
-	//sync all of the wine filters with the url
+	//maintain sync between the page and wine details / filters
 	useEffect(applyUrlParams, [])
 	useEffect(syncBrowserNavigation);
-	useEffect(pushFiltersToHistory, [ wineState.filters.color ]);
 	useEffect(pushWineToHistory, [ wineState.activeWine.id ]);
-
-	//update view-state when switching from list to details
-	useEffect(updatePage, [ wineState.activeWine.id ]);
+	useEffect(pushFiltersToHistory, [ wineState.filters.color ]);
+	useEffect(syncParamsWithWines, [ state.page ]);
 
 
 	//EFFECT HANDLING
 	//-------------------
 	function applyUrlParams(){
-		const url    = new URL(window.location.href);
-		const params = new URLSearchParams(url.search);
-		const color  = params.get("color");
-		const id     = params.get("id");
+
+		const [ color, id ] = getUrlParams("color", "id");
 
 		if(color){
 			dispatchWine({
@@ -73,32 +63,50 @@ function RouterProvider(props){
 				type: ACTIONS.SET_ACTIVE_WINE,
 				value: id
 			});
-		}
-	}//applyUrlParams
-
-	function syncBrowserNavigation(){
-		window.addEventListener("popstate", handleHistoryChange);
-		return () => { window.removeEventListener("popstate", handleHistoryChange) }
-	}//syncBrowserNavigation
-
-	function pushFiltersToHistory(){
-		const { color } = wineState.filters;
-		if(color) window.history.pushState({ color }, "", `?color=${color}`);
-	}//pushFiltersToHistory
-
-	function pushWineToHistory(){
-		const { id } = wineState.activeWine;
-		if(id) window.history.pushState({ id }, "", `?id=${id}`);
-	}//pushWineToHistory
-
-	function updatePage(){
-		if(!!wineState.activeWine.id){
 			dispatch({
 				type: ACTIONS.SET_ACTIVE_PAGE,
 				value: "details"
 			});
 		}
-	}//updatePage
+	}//applyUrlParams
+
+	function syncBrowserNavigation(){
+		//update filters with history back/forward
+		window.addEventListener("popstate", handleHistoryChange);
+		return () => { window.removeEventListener("popstate", handleHistoryChange) }
+	}//syncBrowserNavigation
+
+	function pushFiltersToHistory(){
+		//if the history / url params / wine filters are are out of sync; sync'em
+		const [ paramColor ] = getUrlParams("color");
+		const { color }      = wineState.filters;
+
+		if(color != paramColor){
+			window.history.pushState({ color }, "", `?color=${color}`);	
+		}
+	}//pushFiltersToHistory
+
+	function pushWineToHistory(){
+		//if the history / url params / active wine are are out of sync; sync'em
+		const [ paramId ] = getUrlParams("id");
+		const { id }      = wineState.activeWine;
+
+		if(id != paramId){
+			window.history.pushState({ id }, "", `?id=${id}`);
+		}
+	}//pushWineToHistory
+
+	function syncParamsWithWines(){
+		//make sure that the appropriate url params are shown for the current page
+		switch(state.page){
+			case "list":
+				pushFiltersToHistory();
+				break;
+			case "details":
+				pushWineToHistory();
+				break;
+		}
+	}//syncParamsWithWines
 
 
 	//EVENT HANDLING
@@ -116,12 +124,20 @@ function RouterProvider(props){
 					value: color
 				});
 			}
-
 			if(id){
 				dispatchWine({
 					type: ACTIONS.SET_ACTIVE_WINE,
 					value: id
-				})
+				});
+				dispatch({
+					type: ACTIONS.SET_ACTIVE_PAGE,
+					value: "details"
+				});
+			} else {
+				dispatch({
+					type: ACTIONS.SET_ACTIVE_PAGE,
+					value: "list"
+				});
 			}
 		}
 	}//handleHistoryChange
@@ -131,6 +147,9 @@ function RouterProvider(props){
 	//--------------------
 	const { children } = props;
 
+
+	//RENDER
+	//-------------------
 	return(
 		<Router.Provider 
 			value={{ state, dispatch }}>

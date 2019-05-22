@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Wine } from "CONTEXTS/Wine.jsx";
-import { Router } from "CONTEXTS/Router.jsx";
 import { convertToSafeString } from "SHARED/utils.js";
 import WineListItem from "./WineListItem.jsx";
 import WineListRadioFilter from "./WineListRadioFilter.jsx";
@@ -15,14 +14,12 @@ export default function WineList(){
 	//HOOKS
 	//-----------------------
 	const { state, dispatch } = useContext(Wine);
-	const { page }            = useContext(Router).state;
 
 	//PRIVATE VARS
 	//------------------------
 	const { wines: wineData } = state;
 	const wines               = wineData.map(renderWines);
 	const hasWines            = wines.length > 0;
-	const isActive            = page == "list";
 
 	//RENDER FUNCTIONS
 	//--------------------------
@@ -48,7 +45,7 @@ export default function WineList(){
 	}//renderWines
 
 	return(
-		<article className={`${s.wrapper} ${isActive ? s.active : s.inactive}`}>
+		<article className={`${s.wrapper}`}>
 			<header className={s.header}>
 				<form className={s.filters}>
 					<div className={s.colourOptions}>

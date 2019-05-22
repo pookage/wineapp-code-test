@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Wine } from "CONTEXTS/Wine.jsx";
+import { Router } from "CONTEXTS/Router.jsx";
 import { Client } from "CONTEXTS/Client.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
@@ -10,16 +11,24 @@ export default function WineListItem(props){
 
 	//HOOKS
 	//----------------------
-	const { state, dispatch } = useContext(Wine);
-	const { sizeBucket }      = useContext(Client).state;
+	const { state, dispatch: dispatchWine } = useContext(Wine);
+	const { sizeBucket }                    = useContext(Client).state;
+	const { dispatch: dispatchRouter }      = useContext(Router);
 
 
 	//EVENT HANDLING
 	//----------------------
 	function showDetails(id){
-		dispatch({
+
+		console.log("set wine ID to : ", id);
+
+		dispatchWine({
 			type: ACTIONS.SET_ACTIVE_WINE,
 			value: id
+		});
+		dispatchRouter({
+			type: ACTIONS.SET_ACTIVE_PAGE,
+			value: "details"
 		});
 	}//showDetails
 

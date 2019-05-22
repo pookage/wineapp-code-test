@@ -100,6 +100,16 @@ function detectOS(appVersion){
 	return os;
 }//detectOS
 
+function getUrlParams(...params){
+
+	const url    = new URL(window.location.href);
+	const search = new URLSearchParams(url.search);
+	const values = [...params].map(parameter => search.get(parameter));
+
+	return [...values ];
+
+}//getUrlParams
+
 
 export {
 	convertToSafeString,
@@ -107,5 +117,6 @@ export {
 	detectBrowser,
 	detectOrientation,
 	detectSizeBucket,
-	detectOS
+	detectOS,
+	getUrlParams
 };

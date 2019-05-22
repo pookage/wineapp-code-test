@@ -2,6 +2,7 @@ import React from "react";
 import { ClientProvider } from "CONTEXTS/Client.jsx";
 import { RouterProvider } from "CONTEXTS/Router.jsx";
 import { WineProvider } from "CONTEXTS/Wine.jsx";
+import PageSwapper from "COMPONENTS/PageSwapper/PageSwapper.jsx";
 import WineList from "COMPONENTS/WineList/WineList.jsx";
 import WineDetails from "COMPONENTS/WineDetails/WineDetails.jsx";
 import "SHARED/global.scss";
@@ -15,8 +16,12 @@ export default function App(props){
 		<ClientProvider>
 			<WineProvider>
 				<RouterProvider>
-					<WineList />
-					<WineDetails />
+					<PageSwapper id="list" direction="left">
+						<WineList />
+					</PageSwapper>
+					<PageSwapper id="details" direction="right">
+						<WineDetails />
+					</PageSwapper>
 				</RouterProvider>
 			</WineProvider>
 		</ClientProvider>

@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useEffect, useContext } from "react";
 import { placeholder__wines, fetchWines, fetchWineDetails } from "SHARED/data.js";
+import { getUrlParams } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
 
 const Wine         = createContext();
@@ -10,7 +11,7 @@ const initialState = {
 	},
 	wines: [],
 	filters: {
-		color: "",
+		color: getUrlParams("color")[0] || "red",
 		advanced: []
 	}
 };
@@ -41,13 +42,16 @@ function reducer(state, action){
 			};
 
 		case ACTIONS.SET_ACTIVE_WINE:
-			return {
-				...state,
-				activeWine: {
-					id: value,
-					details: {}
-				}
-			};
+			//only update the active wine if it's different from the current one
+			if(value != state.activeWine.id){
+				return {
+					...state,
+					activeWine: {
+						id: value,
+						details: {}
+					}
+				};
+			} else return { ...state  };
 
 		case ACTIONS.SET_ACTIVE_WINE_DETAILS:
 			return {

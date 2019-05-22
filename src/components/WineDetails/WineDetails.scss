@@ -1,8 +1,39 @@
 .wrapper {
 	position: relative;
+}
 	.back {
 		position: absolute;
 		top: 0;
 		left: 0;
 	}
-}
+	.header {
+		display: flex;
+		flex-direction: column;
+	}
+		.hero {
+			order: 1;
+			width: 100%;
+			height: 87.5vw;
+			position: relative;
+		}
+			.figure {
+				width: 100%;
+				height: 100%;
+			}
+				.image {
+					display: block;
+					height: 100%;
+					width: 100%;
+					object-fit: cover;
+					object-position: center;
+				}
+			.sellingPoints {
+				height: 100%;
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		.summary {
+			order: 2;
+		}

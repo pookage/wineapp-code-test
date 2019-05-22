@@ -6,22 +6,13 @@ import { Router } from "CONTEXTS/Router.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
 import Price from "COMPONENTS/Price/Price.jsx";
 import DiscountSticker from "COMPONENTS/DiscountSticker/DiscountSticker.jsx";
+import RebuyMeter from "COMPONENTS/RebuyMeter/RebuyMeter.jsx";
 import s from "./WineDetails.scss";
 
 console.warn("TODO: refactor using under_score naming convention instead of camelCase");
 console.warn("TODO: move render maps into their own named functions");
 
 export default function WineDetails(props){
-
-
-	/* NOTE:
-	------------------------------------
-	
-		You'll need to change the order of the header-items with
-		flex to maintain the correct semantic order whilst adopting
-		the correct styles
-
-	*/
 
 	//HOOKS
 	//-------------------------
@@ -112,8 +103,13 @@ export default function WineDetails(props){
 
 		return(
 			<article className={`${s.wrapper}`}>
-				<header>
-					<div>
+				<button
+					className={s.back}
+					onClick={backToList}>
+					Back
+				</button>
+				<header className={s.header}>
+					<div className={s.summary}>
 						<h2>
 							{producerName}
 						</h2>
@@ -133,12 +129,19 @@ export default function WineDetails(props){
 							</Price>
 						)}
 					</div>
-					<div>
-						<img src={headerImageSrc} alt={`${wineName} by ${producerName}`} />
-						<aside>
-							<p>
-								{rebuy_rating}% would rebuy
-							</p>
+					<div className={s.hero}>
+						<figure className={s.figure}>
+							<img
+								className={s.image} 
+								src={headerImageSrc} 
+								alt={`${wineName} by ${producerName}`} 
+							/>
+						</figure>
+						<aside className={s.sellingPoints}>
+							<RebuyMeter 
+								HTMLTag="p"
+								percentage={rebuy_rating} 
+							/>
 							{discounted && (
 								<DiscountSticker 
 									HTMLTag="p"
@@ -234,11 +237,7 @@ export default function WineDetails(props){
 					</ol>
 				</aside>
 
-				<button
-					className={s.back}
-					onClick={backToList}>
-					Back
-				</button>
+				
 
 			</article>
 		);

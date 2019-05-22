@@ -6,6 +6,7 @@ import { getAssetUrl } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
 import Price from "COMPONENTS/Price/Price.jsx";
 import DiscountSticker from "COMPONENTS/DiscountSticker/DiscountSticker.jsx";
+import RebuyMeter from "COMPONENTS/RebuyMeter/RebuyMeter.jsx";
 import s from "./WineListItem.scss";
 import shared from "SHARED/shared.scss";
 
@@ -115,12 +116,10 @@ export default function WineListItem(props){
 							{wineName}
 						</h1>
 					</header>
-					<p className={s.rebuyRating}>
-						<span className={s.percentage}>
-							{rebuy_rating}%
-						</span>
-						would rebuy
-					</p>
+					<RebuyMeter 
+						className={s.rebuyRating}
+						percentage={rebuy_rating} 
+					/>
 					<div className={s.prices}>
 						<Price  
 							className={`${s.price} ${s.actual}`}

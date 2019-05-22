@@ -4,6 +4,7 @@ import { Router } from "CONTEXTS/Router.jsx";
 import { Client } from "CONTEXTS/Client.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
+import Price from "COMPONENTS/Price/Price.jsx";
 import s from "./WineListItem.scss";
 import shared from "SHARED/shared.scss";
 
@@ -83,9 +84,6 @@ export default function WineListItem(props){
 
 	const thumbSize      = getThumbSize(sizeBucket);
 	const wineThumbSrc   = getAssetUrl(public_id, { w: thumbSize });
-	const currencySystem = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
-	const price_original = currencySystem.format(original);
-	const price_actual   = currencySystem.format(actual);
 	const discounted     = original != null;
 	const discount       = discounted ? Math.floor((1 - (actual / original)) * 100) : 0;
 	
@@ -123,15 +121,19 @@ export default function WineListItem(props){
 						would rebuy
 					</p>
 					<div className={s.prices}>
-						<p  className={`${s.price} ${s.actual}`}
+						<Price  
+							className={`${s.price} ${s.actual}`}
+							currency={currency}
 							aria-label="Actual cost per bottle.">
-							{price_actual}
-						</p>
+							{actual}
+						</Price>
 						{discounted && (
-							<p  className={`${s.price} ${s.original}`} 
+							<Price
+								className={`${s.price} ${s.original}`}
+								currency={currency}   
 								aria-label="Original cost per bottle">
-								{price_original}
-							</p>
+								{original}
+							</Price>
 						)}
 					</div>
 					{discounted && (

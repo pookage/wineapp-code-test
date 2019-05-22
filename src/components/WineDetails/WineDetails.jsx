@@ -4,6 +4,7 @@ import { Wine } from "CONTEXTS/Wine.jsx";
 import { Client } from "CONTEXTS/Client.jsx";
 import { Router } from "CONTEXTS/Router.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
+import Price from "COMPONENTS/Price/Price.jsx";
 import s from "./WineDetails.scss";
 
 
@@ -55,10 +56,6 @@ export default function WineDetails(props){
 	//EVENT HANDLING
 	//-------------------------
 	function backToList(){
-		// dispatchWine({
-		// 	type: ACTIONS.SET_ACTIVE_WINE,
-		// 	value: ""
-		// });
 
 		dispatchRouter({
 			type: ACTIONS.SET_ACTIVE_PAGE,
@@ -106,10 +103,6 @@ export default function WineDetails(props){
 		const headerImageSrc  = getAssetUrl(public_id, { w: headerImageSize });
 
 		//PRICING
-		//NOTE : this is repeated - might be worth putting some of this in a <Client> provider
-		const currencySystem = new Intl.NumberFormat(navigator.language, { style: "currency", currency });
-		const price_original = currencySystem.format(original);
-		const price_actual   = currencySystem.format(actual);
 		const discounted     = original != null;
 		const discount       = discounted ? Math.floor((1 - (actual / original)) * 100) : 0;
 
@@ -128,13 +121,17 @@ export default function WineDetails(props){
 						<h1>
 							{name}
 						</h1>
-						<p aria-label="Actual price.">
-							{price_actual}
-						</p>
+						<Price 
+							currency={currency}
+							aria-label="Actual price.">
+							{actual}
+						</Price>
 						{discounted && (
-							<p aria-label="Previous price.">
-								{price_original}
-							</p>
+							<Price
+								currency={currency} 
+								aria-label="Previous price.">
+								{original}
+							</Price>
 						)}
 					</div>
 					<div>

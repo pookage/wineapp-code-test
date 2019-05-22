@@ -77,7 +77,9 @@ export default function Pagination(props){
 
 	return (
 		<HTMLTag className={s.wrapper}>
-			{items}
+			<div className={s.items}>
+				{items}
+			</div>
 			<header className={s.navigation}>		
 				<nav className={s.controls}>
 					<button

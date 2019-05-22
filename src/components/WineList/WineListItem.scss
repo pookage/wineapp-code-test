@@ -92,3 +92,20 @@
 				left: 0;
 				transform: translateX(-75%);
 			}
+
+@media(min-width: 768px) and (orientation: landscape){
+	.wrapper {
+		flex: 1 0 50%;
+		max-width: calc(50% - 1rem);
+		margin-bottom: 2em;
+		&+.wrapper {
+			margin-top: 0
+		}
+	}
+		.container {
+			height: 10rem;
+		}
+			.thumb {
+				flex: 0 0 10rem;
+			}
+}

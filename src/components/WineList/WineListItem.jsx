@@ -47,7 +47,7 @@ export default function WineListItem(props){
 				return orientation == "portrait" ? 125 : 225;
 			//tablet
 			case 1:
-				return 300;
+				return 250;
 			//desktop
 			default:
 				return 400;

@@ -12,6 +12,7 @@ import s from "./WineDetails.scss";
 console.warn("TODO: refactor using under_score naming convention instead of camelCase");
 console.warn("TODO: move render maps into their own named functions");
 console.warn("TODO: trap the tab in the details page when active");
+console.warn("TODO: replicate the parallax on the scroll.")
 
 export default function WineDetails(props){
 
@@ -102,6 +103,19 @@ export default function WineDetails(props){
 		const foodTags    = categories.filter(category => category.type == "food_category");
 		const miscTags    = categories.filter(category => category.type != "food_category" && category.type != "primary_flavor");
 
+
+		//RENDER
+		//---------------------------
+		function renderTag(tag){
+			return(
+				<li 
+					key={`tag__${tag.type}__${tag.name}`}
+					className={s.tag}>
+					{tag.name}
+				</li>
+			);
+		}//renderTag
+
 		return(
 			<article className={`${s.wrapper}`}>
 				<button
@@ -182,60 +196,46 @@ export default function WineDetails(props){
 							</div>
 						</dl>
 
-						<ul aria-label="Related tags.">
-							{miscTags.map(tag => (
-								<li>
-									{tag.name}
-								</li>
-							))}
+						<ul className={s.tags} 
+							aria-label="Related tags.">
+							{miscTags.map(renderTag)}
 						</ul>
 					</section>
 
 					<section className={`${s.section} ${s.flavours}`}>
-						<h1>
+						<h1 className={s.title}>
 							Flavours
 						</h1>
-						<p>
+						<p className={s.body}>
 							{tasting_note}
 						</p>
-
-						<ul aria-label="Flavours.">
-							{flavourTags.map(tag => (
-								<li>
-									{tag.name}
-								</li>
-							))}
+						<ul className={s.tags}
+							aria-label="Flavours.">
+							{flavourTags.map(renderTag)}
 						</ul>
 					</section>
 
 					<section className={`${s.section} ${s.foodPairing}`}>
-						<h1>
+						<h1 className={s.title}>
 							Food Pairing
 						</h1>
-						<p>
+						<p className={s.body}>
 							{food_matching}
 						</p>
-
-						<ul aria-label="Good food pairings.">
-							{foodTags.map(tag => (
-								<li>
-									{tag.name}
-								</li>
-							))}
+						<ul className={s.tags}
+							aria-label="Good food pairings.">
+							{foodTags.map(renderTag)}
 						</ul>
 					</section>
 				</section>
 
 				<section className={`${s.section} ${s.winemaker}`}>
-					<h1>
+					<h1 className={s.title}>
 						About the Winemaker
 					</h1>
-					<p>
+					<p className={s.body}>
 						{about_winemaker}
 					</p>
-					<a href="">
-						See more wines from here
-					</a>
 				</section>
 
 			</article>

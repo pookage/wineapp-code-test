@@ -120,10 +120,10 @@
 			color: var(--color__bold);
 			font-weight: 600;
 		}
-		.details {
-			margin: 1em 0;
+		.details, .tags, .body {
+			margin-top: 1.25em;
 		}
-			.property {
+			.property, .tag {
 				display: inline-block;
 				.key, .value {
 					display: inline-block;
@@ -141,3 +141,14 @@
 					margin-left: 1em;
 				}
 			}
+			.tag {
+				padding: 0.33em 1em;
+				margin: 0 0.62em 0.62em 0;
+				font-weight: 600;
+				border-radius: 1em;
+				color: var(--color__bg);
+				background-color: var(--color__accent);
+			}
+		.body {
+			line-height: 1.75em;
+		}

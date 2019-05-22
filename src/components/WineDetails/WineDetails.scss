@@ -1,5 +1,11 @@
 .wrapper {
 	position: relative;
+	&.hidden {
+		opacity: 0;
+	}
+	&.visible {
+		animation: animation__opacity__reveal .3s .6s both;
+	}
 }
 	.back {
 		display: flex;
@@ -152,3 +158,13 @@
 		.body {
 			line-height: 1.75em;
 		}
+
+
+@keyframes animation__opacity__reveal {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

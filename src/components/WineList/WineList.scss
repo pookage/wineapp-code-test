@@ -1,13 +1,13 @@
 .wrapper {
 	--filters__color__height: 20vw;
-	padding: var(--wrapper-padding); //defined in global
+	padding: 0 var(--wrapper-padding) var(--wrapper-padding); //defined in global
 	position: relative;
 }
 	.header {
 		display: block;
 		width: 100%;
-		padding: var(--wrapper-padding);
-		position: fixed;
+		padding: var(--wrapper-padding) 0;
+		position: sticky;
 		top: 0;
 		left: 0;
 		z-index: 2;
@@ -19,6 +19,3 @@
 				justify-content: space-between;
 				align-items: flex-start;
 			}
-	.container {
-		padding-top: calc(var(--filters__color__height) * 1.38 + (2 * var(--wrapper-padding)));
-	}

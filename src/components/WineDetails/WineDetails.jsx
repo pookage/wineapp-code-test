@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import * as ACTIONS from "SHARED/actions.js";
 import { Wine } from "CONTEXTS/Wine.jsx";
 import { Client } from "CONTEXTS/Client.jsx";
@@ -20,6 +20,7 @@ export default function WineDetails(props){
 	//-------------------------
 	const { state, dispatch: dispatchWine } = useContext(Wine);
 	const { dispatch: dispatchRouter }      = useContext(Router);
+	const [ loaded, setLoaded ]             = useState(false)
 
 	const { 
 		sizeBucket, // (number)[0-4] whate size bucket the user's viewport dimensions fit into
@@ -54,6 +55,9 @@ export default function WineDetails(props){
 			value: "list"
 		});
 	}//backToList
+	function reveal(){
+		setLoaded(true);
+	}//reveal
 
 
 	if(Object.values(details).length > 0){
@@ -117,7 +121,7 @@ export default function WineDetails(props){
 		}//renderTag
 
 		return(
-			<article className={`${s.wrapper}`}>
+			<article className={`${s.wrapper} ${loaded ? s.visible : s.hidden}`}>
 				<button
 					className={s.back}
 					onClick={backToList}
@@ -152,9 +156,10 @@ export default function WineDetails(props){
 					<div className={s.hero}>
 						<figure className={s.figure}>
 							<img
-								className={s.image} 
+								className={`${s.image}`} 
 								src={headerImageSrc} 
-								alt={`${wineName} by ${producerName}`} 
+								alt={`${wineName} by ${producerName}`}
+								onLoad={reveal} 
 							/>
 						</figure>
 						<aside className={s.sellingPoints}>

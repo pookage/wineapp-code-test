@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Client } from "CONTEXTS/Client.jsx";
 import { PageSwapper } from "CONTEXTS/PageSwapper.jsx";
 import s from "./Pagination.scss";
 
@@ -10,6 +11,7 @@ export default function Pagination(props){
 	//---------------------------
 	const [ offset, setOffset ]   = useState(0);
 	const { wrapper: pageWrapper} = useContext(PageSwapper);
+	const { sizeBucket }          = useContext(Client).state;
 	useEffect(resetOffset, [ props.children.length ]);
 	useEffect(scrollToTop, [ offset ]);
 
@@ -36,11 +38,27 @@ export default function Pagination(props){
 		setOffset(index);
 	}//setPage
 
+	//UTILS
+	//---------------------------
+	function getDefaultMaxItems(bucket){
+		switch(bucket){
+			case 0:
+			case 1:
+				return 10;
+			case 2:
+				return 24;
+			case 3:
+				return 35;
+			default:
+				return 20;
+		}
+	}//getDefaultMaxItems
+
 
 	//PRIVATE VARS
 	//---------------------------
 	const {
-		maxItems = 10,   // (number) maximum no. of items per page
+		maxItems = getDefaultMaxItems(sizeBucket),   // (number) maximum no. of items per page
 		HTMLTag  = "ol", // (string) which semantic tag should be used for the component wrapper
 		children         // (array) of elements to paginate
 	} = props;

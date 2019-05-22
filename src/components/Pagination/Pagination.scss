@@ -41,6 +41,10 @@
 					border-bottom: 2px solid var(--color__highlight);
 					outline: 0;
 				}
+				&:not(:disabled):hover {
+					 color: var(--color__highlight);
+					 cursor: pointer;
+				}
 				
 			}
 			.pageList {
@@ -58,11 +62,25 @@
 			}
 		}
 
-@media(min-width: 768px) and (orientation: landscape){
+@media(min-width: 768px) and (orientation: landscape), (min-width: 1025px){
 	.items {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: flex-start;
 	}
+}
+
+@media(min-width: 1025px){
+	.wrapper {
+		padding: var(--wrapper-padding);
+	}
+		.controls {
+			max-width: 50vw;
+			justify-content: center;
+		}
+			.pageList {
+				margin: 0;
+			}
+
 }

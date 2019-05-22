@@ -43,3 +43,21 @@
 			margin: auto;
 		}
 }
+
+@media(min-width: 1025px){
+	.wrapper {
+		display: flex;
+		padding: 0;
+	}
+		.header {
+			width: auto;
+			padding: var(--wrapper-padding) 0 var(--wrapper-padding) var(--wrapper-padding);
+			max-height: 100vh;
+		}
+			.filters {
+				height: 100%;
+			}
+				.colourOptions {
+					flex-direction: column;
+				}
+}

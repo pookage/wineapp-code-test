@@ -22,6 +22,7 @@
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		background-color: transparent;
+		transition: border-color .3s;
 		&::after {
 			content: "<";
 			height: var(--back_button__size);
@@ -29,9 +30,11 @@
 			font-size: var(--font__size__title);
 			line-height: 1em;
 			color: var(--color__bg);
+			transition: color .3s;
 		}
 		&:hover::after {
 			color: var(--color__highlight);
+			cursor: pointer;
 		}
 		&:focus {
 			outline: 0;
@@ -182,7 +185,7 @@
 	}
 }
 
-@media(orientation: landscape){
+@media(orientation: landscape), (min-width: 1025px){
 	.wrapper {
 		display: flex;
 		width: 100%;
@@ -211,7 +214,7 @@
 		.info {}
 }
 
-@media(min-width: 768px) and (orientation: landscape){
+@media(min-width: 768px) and (orientation: landscape), (min-width: 1025px){
 	.back {
 		
 	}

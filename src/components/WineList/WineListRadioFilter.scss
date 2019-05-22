@@ -11,8 +11,12 @@
 		-moz-apperance: none;
 		&:checked ~ .button {
 			box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.3);
+			background-color: var(--color__bg__alt);
 			.label {
 				color: var(--color__accent);
+			}
+			&:hover {
+				cursor: default;
 			}
 		}
 		&:focus {
@@ -32,7 +36,12 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: flex-end;
-		transition: box-shadow .3s;
+		background-color: var(--color__bg);
+		transition: box-shadow .3s, background-color .15s;
+		&:hover {
+			background-color: var(--color__bg__alt);
+			cursor: pointer;
+		}
 		&::before {
 			content: "";
 			display: block;
@@ -66,3 +75,12 @@
 			.text {
 				font-size: var(--font__size__label);
 			}
+
+
+@media(min-width: 1025px){
+	.wrapper {
+		&+.wrapper {
+			margin-top: calc(var(--wrapper-padding) / 2);			
+		}
+	}
+}

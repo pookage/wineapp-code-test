@@ -1,14 +1,18 @@
 .wrapper {
 	border: 2px solid transparent;
-	transition: box-shadow .15s, background-color .15s, opacity .3s;
+	transition: box-shadow .15s, background-color .15s, opacity .3s, border-color .15s, transform .3s;
 	&+.wrapper {
 		margin-top: 2em;
 	}
 	&:active,
+	&:focus,
+	&:hover {
+		background-color: var(--color__bg__alt);
+		box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.5);
+		cursor: pointer;
+	}
 	&:focus {
 		border-color: var(--color__highlight);
-		background-color: #f8f8f8;
-		box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.5);
 		outline: 0;
 	}
 	&.visible {
@@ -93,7 +97,7 @@
 				transform: translateX(-75%);
 			}
 
-@media(min-width: 768px) and (orientation: landscape){
+@media(min-width: 768px) and (orientation: landscape), (min-width: 1025px){
 	.wrapper {
 		flex: 1 0 50%;
 		max-width: calc(50% - 1rem);
@@ -108,4 +112,27 @@
 			.thumb {
 				flex: 0 0 10rem;
 			}
+}
+
+@media(min-width: 1600px){
+	.wrapper {
+		flex-basis: 33%;
+		max-width: calc(33% - 1rem)
+	}
+}
+
+@media(min-width: 2000px){
+	.wrapper {
+		flex-basis: 25%;
+		max-width: calc(25% - 1rem)
+	}	
+}
+
+@media(pointer: fine){
+	.wrapper {
+		transform: scale(1);
+		&:hover {
+			transform: scale(1.05);
+		}
+	}	
 }

@@ -11,6 +11,7 @@ import s from "./WineDetails.scss";
 
 console.warn("TODO: refactor using under_score naming convention instead of camelCase");
 console.warn("TODO: move render maps into their own named functions");
+console.warn("TODO: trap the tab in the details page when active");
 
 export default function WineDetails(props){
 
@@ -105,29 +106,34 @@ export default function WineDetails(props){
 			<article className={`${s.wrapper}`}>
 				<button
 					className={s.back}
-					onClick={backToList}>
-					Back
-				</button>
+					onClick={backToList}
+					aria-label="Back to list." 
+				/>
+				
 				<header className={s.header}>
 					<div className={s.summary}>
-						<h2>
+						<h2 className={`${s.name} ${s.producer}`}>
 							{producerName}
 						</h2>
-						<h1>
-							{name}
+						<h1 className={`${s.name} ${s.wine}`}>
+							{wineName}
 						</h1>
-						<Price 
-							currency={currency}
-							aria-label="Actual price.">
-							{actual}
-						</Price>
-						{discounted && (
+						<div className={s.prices}>
 							<Price
-								currency={currency} 
-								aria-label="Previous price.">
-								{original}
+								className={s.actual} 
+								currency={currency}
+								aria-label="Actual price.">
+								{actual}
 							</Price>
-						)}
+							{discounted && (
+								<Price
+									className={s.original}
+									currency={currency} 
+									aria-label="Previous price.">
+									{original}
+								</Price>
+							)}
+						</div>
 					</div>
 					<div className={s.hero}>
 						<figure className={s.figure}>
@@ -154,71 +160,73 @@ export default function WineDetails(props){
 					</div>
 				</header>
 				
-				<section>
-					<h1>
-						About this wine
-					</h1>
-					<dl>
-						<div>
-							<dt>Year</dt>
-							<dd>{year}</dd>
-						</div>
-						<div>
-							<dt>Size</dt>
-							<dd>{quantity}{measure}</dd>
-						</div>
-						<div>
-							<dt>
-								<abbr title="Alchol by Volume">ABV</abbr>
-							</dt>
-							<dd>{strength}%</dd>
-						</div>
-					</dl>
+				<section className={`${s.section} ${s.wine}`}>
+					<section className={`${s.section} ${s.about}`}>
+						<h1 className={s.title}>
+							About this wine
+						</h1>
+						<dl className={s.details}>
+							<div className={s.property}>
+								<dt className={s.key}>Year</dt>
+								<dd className={s.value}>{year}</dd>
+							</div>
+							<div className={s.property}>
+								<dt className={s.key}>Size</dt>
+								<dd className={s.value}>{quantity}{measure}</dd>
+							</div>
+							<div className={s.property}>
+								<dt className={s.key}>
+									<abbr title="Alchol by Volume">ABV</abbr>
+								</dt>
+								<dd className={s.value}>{strength}%</dd>
+							</div>
+						</dl>
 
-					<ul aria-label="Related tags.">
-						{miscTags.map(tag => (
-							<li>
-								{tag.name}
-							</li>
-						))}
-					</ul>
+						<ul aria-label="Related tags.">
+							{miscTags.map(tag => (
+								<li>
+									{tag.name}
+								</li>
+							))}
+						</ul>
+					</section>
+
+					<section className={`${s.section} ${s.flavours}`}>
+						<h1>
+							Flavours
+						</h1>
+						<p>
+							{tasting_note}
+						</p>
+
+						<ul aria-label="Flavours.">
+							{flavourTags.map(tag => (
+								<li>
+									{tag.name}
+								</li>
+							))}
+						</ul>
+					</section>
+
+					<section className={`${s.section} ${s.foodPairing}`}>
+						<h1>
+							Food Pairing
+						</h1>
+						<p>
+							{food_matching}
+						</p>
+
+						<ul aria-label="Good food pairings.">
+							{foodTags.map(tag => (
+								<li>
+									{tag.name}
+								</li>
+							))}
+						</ul>
+					</section>
 				</section>
 
-				<section>
-					<h1>
-						Flavours
-					</h1>
-					<p>
-						{tasting_note}
-					</p>
-
-					<ul aria-label="Flavours.">
-						{flavourTags.map(tag => (
-							<li>
-								{tag.name}
-							</li>
-						))}
-					</ul>
-				</section>
-
-				<section>
-					<h1>
-						Food Pairing
-					</h1>
-					<p>
-						{food_matching}
-					</p>
-
-					<ul aria-label="Good food pairings.">
-						{foodTags.map(tag => (
-							<li>
-								{tag.name}
-							</li>
-						))}
-					</ul>
-				</section>
-
-				<section>
+				<section className={`${s.section} ${s.winemaker}`}>
 					<h1>
 						About the Winemaker
 					</h1>
@@ -229,17 +237,6 @@ export default function WineDetails(props){
 						See more wines from here
 					</a>
 				</section>
-
-				<aside>
-					<h1>
-						You may also like
-					</h1>
-					<ol>
-						<li>~~look in the endpoints to see if there's any 'recommended_wines' section~~</li>
-					</ol>
-				</aside>
-
-				
 
 			</article>
 		);

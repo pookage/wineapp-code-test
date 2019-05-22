@@ -9,7 +9,8 @@ const initialState = {
 	orientation: "portrait",
 	os: "android",
 	browser: "chrome",
-	isTouch: true
+	isTouch: true,
+	language: window.navigator.language
 };
 
 function reducer(state, action){

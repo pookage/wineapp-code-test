@@ -67,11 +67,9 @@ export default function WineList(){
 				</form>
 			</header>
 			<div className={s.container}>
-				{hasWines && (
-					<Pagination>
-						{wines}
-					</Pagination>
-				)}
+				<Pagination>
+					{wines}
+				</Pagination>
 			</div>
 		</article>
 	);

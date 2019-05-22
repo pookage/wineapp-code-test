@@ -1,8 +1,17 @@
 .wrapper {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 }
+	.items {
+		width: 100%;
+	}
 	.navigation {
 		font-weight: 300;
+		margin-top: auto;
 	}
 		.controls {
 			display: flex;
@@ -61,6 +70,21 @@
 				font-weight: 600;
 			}
 		}
+	.noResults {
+		font-size: var(--font__size__subheading);
+		opacity: 0.5;
+		margin-top: 1.62em;
+		animation: appear .3s 2s both;
+	}
+
+@keyframes appear {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
 
 @media(min-width: 768px) and (orientation: landscape), (min-width: 1025px){
 	.items {

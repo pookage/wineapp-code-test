@@ -1,6 +1,8 @@
 .wrapper {
 	position: relative;
 	text-align: center;
+	flex: 1 0 25%;
+	max-width: calc(25% - (var(--wrapper-padding) / 2));
 }	
 	.input {
 		position: absolute;
@@ -29,7 +31,6 @@
 		display: flex;
 		font-size: var(--filters__color__height); //defined in WineList.scss
 		height: 1.38em;
-		width: 1em;
 		padding: 0.5rem;
 		border: 2px solid transparent;
 		flex-direction: column;
@@ -75,20 +76,13 @@
 				font-size: var(--font__size__label);
 			}
 
-@media(min-width: 768px) and (max-width: 1024px){
-	.wrapper {
-		flex: 1 0 25%;
-		max-width: calc(25% - 1rem);
-	}
-		.button {
-			width: auto;
-		}
-}
-
 @media(min-width: 1025px){
 	.wrapper {
 		&+.wrapper {
 			margin-top: calc(var(--wrapper-padding) / 2);			
 		}
 	}
+		.button {
+			width: 1em;
+		}
 }

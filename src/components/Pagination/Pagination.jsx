@@ -93,33 +93,43 @@ export default function Pagination(props){
 		return buttons;
 	}//renderNumberedButtons
 
-	return (
-		<HTMLTag className={s.wrapper}>
-			<div className={s.items}>
-				{items}
-			</div>
-			<header className={s.navigation}>		
-				<nav className={s.controls}>
-					<button
-						className={`${s.button} ${s.previous}`} 
-						onClick={previousPage}
-						disabled={page == 1}
-						aria-label="Previous page of results." 
-					/>
-					<div className={s.pageList}>
-						{renderNumberedButtons()}
-					</div>
-					<button
-						className={`${s.button} ${s.next}`} 
-						onClick={nextPage}
-						disabled={page == pages}
-						aria-label="Next page of results."
-					/>
-				</nav>
-				<p className={s.currentPage}>
-					Page <span className={s.number}>{page}</span> of <span className={s.number}>{pages}</span>
+	if(items.length > 0) {
+		return(
+			<HTMLTag className={s.wrapper}>
+				<div className={s.items}>
+					{items}
+				</div>
+				<header className={s.navigation}>		
+					<nav className={s.controls}>
+						<button
+							className={`${s.button} ${s.previous}`} 
+							onClick={previousPage}
+							disabled={page == 1}
+							aria-label="Previous page of results." 
+						/>
+						<div className={s.pageList}>
+							{renderNumberedButtons()}
+						</div>
+						<button
+							className={`${s.button} ${s.next}`} 
+							onClick={nextPage}
+							disabled={page == pages}
+							aria-label="Next page of results."
+						/>
+					</nav>
+					<p className={s.currentPage}>
+						Page <span className={s.number}>{page}</span> of <span className={s.number}>{pages}</span>
+					</p>
+				</header>
+			</HTMLTag>
+		);
+	} else {
+		return (
+			<HTMLTag className={s.wrapper}>
+				<p className={s.noResults}>
+					Looks like we're dry!
 				</p>
-			</header>
-		</HTMLTag>
-	);
+			</HTMLTag>
+		)
+	}
 }//Pagination

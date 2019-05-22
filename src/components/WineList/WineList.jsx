@@ -70,14 +70,10 @@ export default function WineList(){
 				</form>
 			</header>
 			<div className={s.container}>
-				{hasWines ? (
+				{hasWines && (
 					<Pagination>
 						{wines}
 					</Pagination>
-				) : (
-					<p>
-						Sorry, no wines match those filters!
-					</p>
 				)}
 			</div>
 		</article>

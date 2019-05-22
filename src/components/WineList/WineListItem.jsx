@@ -5,6 +5,7 @@ import { Client } from "CONTEXTS/Client.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
 import Price from "COMPONENTS/Price/Price.jsx";
+import DiscountSticker from "COMPONENTS/DiscountSticker/DiscountSticker.jsx";
 import s from "./WineListItem.scss";
 import shared from "SHARED/shared.scss";
 
@@ -137,12 +138,11 @@ export default function WineListItem(props){
 						)}
 					</div>
 					{discounted && (
-						<aside className={s.discount}>
-							<span>
-								{discount}%
-							</span>
-							off
-						</aside>
+						<DiscountSticker 
+							className={s.discount}
+							discount={discount}
+						/>
+						
 					)}
 				</figcaption>
 			</figure>

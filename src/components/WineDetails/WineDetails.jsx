@@ -5,10 +5,9 @@ import { Client } from "CONTEXTS/Client.jsx";
 import { Router } from "CONTEXTS/Router.jsx";
 import { getAssetUrl } from "SHARED/utils.js";
 import Price from "COMPONENTS/Price/Price.jsx";
+import DiscountSticker from "COMPONENTS/DiscountSticker/DiscountSticker.jsx";
 import s from "./WineDetails.scss";
 
-
-console.warn("TODO : create a client provider to put regional currency stuff into");
 console.warn("TODO: refactor using under_score naming convention instead of camelCase");
 console.warn("TODO: move render maps into their own named functions");
 
@@ -141,9 +140,10 @@ export default function WineDetails(props){
 								{rebuy_rating}% would rebuy
 							</p>
 							{discounted && (
-								<p>
-									{discount}% off
-								</p>
+								<DiscountSticker 
+									HTMLTag="p"
+									discount={discount} 
+								/>
 							)}
 						</aside>
 					</div>

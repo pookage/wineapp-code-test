@@ -22,10 +22,16 @@ export default function Pagination(props){
 		setOffset(0);
 	}//resetOffset
 	function scrollToTop(){
-		pageWrapper.current.scrollTo({
-			top: 0,
-			behavior: "smooth"
-		});
+
+		try {
+			pageWrapper.current.scrollTo({
+				top: 0,
+				behavior: "smooth"
+			});
+		} catch(error){
+			pageWrapper.current.scrollTop = 0;
+		}
+
 	}//scrollToTop	
 
 

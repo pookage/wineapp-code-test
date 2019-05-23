@@ -9,6 +9,7 @@
 		display: block;
 		width: 100%;
 		padding: var(--header__padding) 0;
+		position: -webkit-sticky;
 		position: sticky;
 		top: 0;
 		left: 0;

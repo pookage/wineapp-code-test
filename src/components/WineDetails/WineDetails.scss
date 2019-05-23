@@ -13,6 +13,7 @@
 		border: 2px solid transparent;
 		margin-left: calc((-1 * var(--back_button__size)) - 4px);
 		margin-top: calc((-1 * var(--back_button__size)) - 4px);
+		position: -webkit-sticky;
 		position: sticky;
 		top: var(--wrapper-padding);
 		left: var(--wrapper-padding);
@@ -201,6 +202,7 @@
 			flex: 1 0 30%;
 			max-width: 50%;
 			height: 100%;
+			position: -webkit-sticky;
 			position: sticky;
 			top: 0;
 			left: 0;

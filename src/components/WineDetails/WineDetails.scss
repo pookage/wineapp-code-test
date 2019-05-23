@@ -124,58 +124,61 @@
 					text-decoration: line-through;
 				}
 			}
-	.section {
-		padding: var(--wrapper-padding);
-		font-weight: 300;
-		&.wine {
-			padding-top: calc(2 * var(--wrapper-padding));
-			padding-bottom: calc(2 * var(--wrapper-padding));
-			background-color: var(--color__bg__alt);
-		}
+	.info {
+		flex: 1;
+	}
 		.section {
-			padding: 0;
-			&+.section {
-				margin-top: var(--wrapper-padding);
+			padding: var(--wrapper-padding);
+			font-weight: 300;
+			&.wine {
+				padding-top: calc(2 * var(--wrapper-padding));
+				padding-bottom: calc(2 * var(--wrapper-padding));
+				background-color: var(--color__bg__alt);
+			}
+			.section {
+				padding: 0;
+				&+.section {
+					margin-top: var(--wrapper-padding);
+				}
 			}
 		}
-	}
-		.title {
-			font-size: var(--font__size__subheading);
-			color: var(--color__bold);
-			font-weight: 600;
-		}
-		.details, .tags, .body {
-			margin-top: 1.25em;
-		}
-			.property, .tag {
-				display: inline-block;
-				.key, .value {
+			.title {
+				font-size: var(--font__size__subheading);
+				color: var(--color__bold);
+				font-weight: 600;
+			}
+			.details, .tags, .body {
+				margin-top: 1.25em;
+			}
+				.property, .tag {
 					display: inline-block;
-					vertical-align: top;
-				}
-				.key {
-					font-weight: 900;
-					&::after {
-						content: ":";
+					.key, .value {
 						display: inline-block;
-						margin-right: 0.5ch;
+						vertical-align: top;
+					}
+					.key {
+						font-weight: 900;
+						&::after {
+							content: ":";
+							display: inline-block;
+							margin-right: 0.5ch;
+						}
+					}
+					&+.property {
+						margin-left: 1em;
 					}
 				}
-				&+.property {
-					margin-left: 1em;
+				.tag {
+					padding: 0.33em 1em;
+					margin: 0 0.62em 0.62em 0;
+					font-weight: 600;
+					border-radius: 1em;
+					color: var(--color__bg);
+					background-color: var(--color__accent);
 				}
+			.body {
+				line-height: 1.75em;
 			}
-			.tag {
-				padding: 0.33em 1em;
-				margin: 0 0.62em 0.62em 0;
-				font-weight: 600;
-				border-radius: 1em;
-				color: var(--color__bg);
-				background-color: var(--color__accent);
-			}
-		.body {
-			line-height: 1.75em;
-		}
 
 
 @keyframes animation__opacity__reveal {

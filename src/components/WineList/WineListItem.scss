@@ -1,4 +1,5 @@
 .wrapper {
+	display: flex;
 	border: 2px solid transparent;
 	transition: box-shadow .15s, background-color .15s, opacity .3s, border-color .15s, transform .3s;
 	&+.wrapper {
@@ -26,6 +27,7 @@
 	.container {
 		display: flex;
 		height: 8rem;
+		width: 100%;
 		justify-content: flex-start;
 		align-items: flex-start;
 	}

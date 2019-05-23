@@ -35,11 +35,10 @@
 		}
 		&:hover, &:focus {
 			outline: 0;
+			cursor: pointer;	
 			&:after {
 				color: var(--color__highlight);
-				cursor: pointer;	
 			}
-			
 		}
 	}
 	.header {

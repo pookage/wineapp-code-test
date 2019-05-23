@@ -80,7 +80,7 @@ function buildConfig(env, args){
 									"@babel/preset-env", {
 										"targets": {
 											browsers: [
-												"> 2%, not dead"
+												"> 0.25%, not dead"
 											]
 										}
 									},

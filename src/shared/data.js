@@ -1,5 +1,7 @@
 async function fetchWines(parameters, list = []){
 
+	console.warn("TODO: Add fetch polyfill for < Edge");
+
 	if(parameters){
 
 		const {

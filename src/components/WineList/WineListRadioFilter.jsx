@@ -16,6 +16,8 @@ export default function WineListRadioFilter(props){
 	//-----------------------
 	function updateFilter(filterKey, value){
 		
+		//NOTE : using switch to make adding additional filters easy later
+
 		switch(filterKey){
 			case "wine_color":
 				dispatch({
@@ -24,29 +26,25 @@ export default function WineListRadioFilter(props){
 				});
 				break;
 		}
-
-		input.current.blur();
-		
 	}//updateFilter
 
 
 	//PRIVATE VARS
 	//----------------------
 	const {
-		filter,
-		value
+		filter, // (string) key of the filter this input controls
+		value   // (string) value of the filter this input controls
 	} = props;
 
 	const {
-		color
+		color // (string) value of currently active 'color' filter
 	} = state.filters;
 
-	const inputId  = `${filter}__${value}`;
-	const checked = color == value;
+	const inputId = `${filter}__${value}`;
+	const checked = color == value; // NOTE : more detailed checks needed when more filters added
 
-	updateFilter   = updateFilter.bind(true, filter, value);
-
-	
+	//binding here to avoid a messy return
+	updateFilter  = updateFilter.bind(true, filter, value);
 
 	return(
 		<div className={s.wrapper}>

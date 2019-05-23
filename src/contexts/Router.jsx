@@ -3,9 +3,6 @@ import { Wine } from "CONTEXTS/Wine.jsx";
 import { getUrlParams } from "SHARED/utils.js";
 import * as ACTIONS from "SHARED/actions.js";
 
-console.warn("TODO: handle unknown values for the id / filters if the user changes them.");
-console.warn("TODO: add swipe support to navigate to/from details page");
-
 const Router       = createContext();
 const initialState = {
 	page: "list"
@@ -14,8 +11,8 @@ const initialState = {
 function reducer(state, action){
 
 	const {
-		type,    // (string) which action to perform (from SHARED/actions.js)
-		value    // (???) TBD
+		type,
+		value
 	} = action;
 
 	switch(type){
@@ -24,6 +21,7 @@ function reducer(state, action){
 				...state,
 				page: value
 			};
+
 		default:
 			console.error(`Action: ${type} does not exist in the <Router> context.`);
 			return { ...state };
@@ -50,6 +48,7 @@ function RouterProvider(props){
 	//-------------------
 	function applyUrlParams(){
 
+		//apply any parameters that exist in the url on page load
 		const [ color, id ] = getUrlParams("color", "id");
 
 		if(color){
@@ -118,7 +117,6 @@ function RouterProvider(props){
 				color,
 				id
 			} = event.state;
-
 			if(color){
 				dispatchWine({
 					type: ACTIONS.FILTER_BY_COLOR,

@@ -38,6 +38,7 @@ function reducer(state, action){
 			};
 
 		default:
+			console.error(`Action: ${type} does not exist in the <Client> context.`);
 			return { ...state };
 	}
 
@@ -55,8 +56,6 @@ function ClientProvider(props){
 	//HOOK HANDLING
 	//-----------------
 	function updateDimensions(){
-
-		console.warn("TODO: Add a debounced resize listener to sync updateDimensions");
 
 		const orientation = detectOrientation(window)
 		const sizeBucket  = detectSizeBucket(window, orientation);

@@ -25,6 +25,9 @@
 			& ~ .button {
 				border-color: var(--color__highlight);	
 			}
+			&:checked ~ .button {
+				border-color: transparent;
+			}
 		}
 	}
 	.button {

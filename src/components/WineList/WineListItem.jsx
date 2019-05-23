@@ -67,31 +67,29 @@ export default function WineListItem(props){
 	} = props;
 
 	const {
-		background_color,
-		public_id,
-		type,
-		subtype
+		public_id,    // (string) id used to retrieve asset from cloudinary
 	} = wineMedia[0];
 
 	const {
-		name: producerName   = "",
-		about                = "",
-		media: producerMedia = [{}],
+		name: producerName   = "" // (string) name of the wine's producer
 	} = producer;
 
 	const {
-		actual,
-		original,
-		currency
+		actual,   // (number) current price of the wine
+		original, // (number) previous price of the wine if discounted (0 if not discounted)
+		currency  // (string) currency code of for the actual / original price values
 	} = priceData;
 	
 
+	//asset retrieval
 	const thumbSize      = getThumbSize(sizeBucket);
 	const wineThumbSrc   = getAssetUrl(public_id, { w: thumbSize });
+
+	//discount calculations
 	const discounted     = original != null;
 	const discount       = discounted ? Math.floor((1 - (actual / original)) * 100) : 0;
 	
-	//give the event handler the id
+	//give the event handler the id to avoid adding logic inside the return
 	showDetails          = showDetails.bind(true, id);
 
 

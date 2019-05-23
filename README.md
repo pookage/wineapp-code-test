@@ -31,3 +31,21 @@
 	- All comments are stripped during bundling process
 
 	
+## Further improvements
+
+These are some features that I would have like to have added, but had to cut due to time constraints.
+
+- Scroll the active page no. in the pagination to the center when changed.
+- Trap the tab focus to only elements inside the active page
+- Include the currency system as part of the `<Client>` context rather than recalculate in every instance.
+- Add a debounced resize listener to update the `<Client>` dimension data
+- Style the rebuy ratio rings as radial `<meter>` elements instead of just a 'border'
+- Handle unknown values if the user manually changes the url query parameters
+- Add gesture support throughout the app
+- Replicate slight parallax effect when scrolling on the details page
+- Replace arrows with SVG icons instead of ::pseudo 'content' to prevent screen-reader announcements
+- Show 'loading' animations whilst fetching data / images
+- Add IE10/11 support with:
+	- `fetch()` polyfill
+	- `URL()` polyfill
+	- `URLSearchParams()` polyfill

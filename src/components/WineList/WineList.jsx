@@ -18,17 +18,17 @@ export default function WineList(){
 	const wines               = wineData.map(renderWines);
 	const hasWines            = wines.length > 0;
 
-	//RENDER FUNCTIONS
+	//RENDER
 	//--------------------------
 	function renderWines(details, index){
 
 		const {
-			name: wineName = "", // (string) Human-readable name of the wine
-			producer       = {}
+			name: wineName = "", // (string) human-readable name of the wine
+			producer       = {}  // (object) containing information about the wine's producer
 		} = details;
 
 		const {
-			name: producerName = ""
+			name: producerName = "" // (string) name of the wine's producer
 		} = producer;
 
 		const key = convertToSafeString(`wine_list__${producerName}__${wineName}`);

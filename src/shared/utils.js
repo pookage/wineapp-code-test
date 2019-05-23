@@ -102,8 +102,6 @@ function detectOS(appVersion){
 
 function getUrlParams(...params){
 
-	console.warn("TODO: Add URL and URLSearchParams polyfill for < Edge");
-
 	const url    = new URL(window.location.href);
 	const search = new URLSearchParams(url.search);
 	const values = [...params].map(parameter => search.get(parameter));

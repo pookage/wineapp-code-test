@@ -1,4 +1,5 @@
-export const SET_ACTIVE_PAGE             = "SET_ACTIVE_PAGE"; //not used yet
+//create a predefined list of actions to encourage re-use and avoid typos
+export const SET_ACTIVE_PAGE             = "SET_ACTIVE_PAGE";
 export const FILTER_BY_COLOR             = "FILTER_BY_COLOR";
 export const UPDATE_WINES                = "UPDATE_WINES";
 export const SET_ACTIVE_WINE             = "SET_ACTIVE_WINE";

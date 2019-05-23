@@ -5,13 +5,16 @@ import s from "./Pagination.scss";
 
 export default function Pagination(props){
 
-	console.warn("TODO: scroll the active page no. to the center of the pagination.");
-
 	//HOOKS
 	//---------------------------
 	const [ offset, setOffset ]   = useState(0);
-	const { wrapper: pageWrapper} = useContext(PageSwapper);
-	const { sizeBucket }          = useContext(Client).state;
+	const { 
+		wrapper: pageWrapper // (HTMLElement) reference to the page's scrollable outer wrapper
+	} = useContext(PageSwapper);
+	const { 
+		sizeBucket // (number)[0-4] which size bucket the user's viewport fits into
+	} = useContext(Client).state;
+
 	useEffect(resetOffset, [ props.children.length ]);
 	useEffect(scrollToTop, [ offset ]);
 
@@ -69,11 +72,16 @@ export default function Pagination(props){
 		children         // (array) of elements to paginate
 	} = props;
 
+	//calculate which children to show
 	const startIndex   = offset * maxItems;
 	const endIndex     = startIndex + maxItems;
 	const items        = children.slice(startIndex, endIndex);
+
+	//derive pagination labels
 	const page         = offset + 1;
 	const pages        = Math.ceil(children.length / maxItems);
+
+	//rebind update function for more readable use later
 	const nextPage     = updatePage.bind(true, +1);
 	const previousPage = updatePage.bind(true, -1);
 
@@ -99,6 +107,8 @@ export default function Pagination(props){
 		return buttons;
 	}//renderNumberedButtons
 
+
+	//render the pagination if there's any results to show...
 	if(items.length > 0) {
 		return(
 			<HTMLTag className={s.wrapper}>
@@ -129,7 +139,10 @@ export default function Pagination(props){
 				</header>
 			</HTMLTag>
 		);
-	} else {
+	} 
+
+	//...show a cheeky message when there's no results
+	else {
 		return (
 			<HTMLTag className={s.wrapper}>
 				<p className={s.noResults}>

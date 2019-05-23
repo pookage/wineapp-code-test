@@ -9,11 +9,6 @@ import DiscountSticker from "COMPONENTS/DiscountSticker/DiscountSticker.jsx";
 import RebuyMeter from "COMPONENTS/RebuyMeter/RebuyMeter.jsx";
 import s from "./WineDetails.scss";
 
-
-console.warn("TODO: trap the tab in the details page when active");
-console.warn("TODO: replicate the parallax on the scroll.")
-console.warn("TODO: add highligts bar over back button on scroll to provide contrast.")
-
 export default function WineDetails(props){
 
 	//HOOKS
@@ -28,7 +23,7 @@ export default function WineDetails(props){
 	} = useContext(Client).state;
 
 	const { 
-		details // (object)
+		details // (object) from server containing details about the current wine
 	} = state.activeWine;
 
 
@@ -49,7 +44,6 @@ export default function WineDetails(props){
 	//EVENT HANDLING
 	//-------------------------
 	function backToList(){
-
 		dispatchRouter({
 			type: ACTIONS.SET_ACTIVE_PAGE,
 			value: "list"
@@ -66,47 +60,49 @@ export default function WineDetails(props){
 		//--------------------------
 		
 		const {
-			name: wineName = "",
-			producer       = {},
-			price          = {},
-			media          = [],
-			categories     = [],
-			rebuy_rating,
-			year,
-			quantity,
-			measure,
-			strength,
-			food_matching  = "",
-			tasting_note   = ""
+			name: wineName = "", // (string) name of the wine
+			producer       = {}, // (object) containing details about the wine's producer
+			price          = {}, // (object) containing the prices and currency for the wine
+			media          = [], // (array) of objects containing cloudinary ids for associated media
+			categories     = [], // (array) of tags / categories that the wine fits into
+			rebuy_rating,        // (number)[0-100] percentage of users who would buy the wine again
+			year,                // (number)[yyyy] Year the wine was made
+			quantity,            // (number) volume per bottle
+			measure,             // (string) units used for the quantity
+			strength,            // (number) APV for the wine
+			food_matching  = "", // (string) descriptive text for what food pairs with the wine
+			tasting_note   = ""  // (string) descriptive text for the wine's flavours
 		} = details;
 
 		const {
-			name: producerName = "",
-			about: winemakerAbout = ""
+			name: producerName    = "", // (string) name of the producer
+			about: winemakerAbout = ""  // (string) history / about text for the producer
 		} = producer;
 
 		const {
-			actual,
-			original,
-			currency
+			actual,   // (number) current price of the wine
+			original, // (number) previous price of the wine if discounted (0 if not discounted)
+			currency  // (string) currency code of for the actual / original price values
 		} = price;
 
 		const {
-			public_id
+			public_id // (string) id used to retrieve asset from cloudinary
 		} = media[0];
 
+		//asset retrieval
 		const headerImageSize = getHeaderSize(sizeBucket, orientation);
 		const headerImageSrc  = getAssetUrl(public_id, { w: headerImageSize });
 
-		//PRICING
+		//pricing
 		const discounted     = original != null;
 		const discount       = discounted ? Math.floor((1 - (actual / original)) * 100) : 0;
 
-		//TAGS
+		//tags
 		const flavourTags = categories.filter(category => category.type == "primary_flavor");
 		const foodTags    = categories.filter(category => category.type == "food_category");
 		const miscTags    = categories.filter(category => category.type != "food_category" && category.type != "primary_flavor");
 
+		//orientation flag used for selective rendering
 		const isLandscape = orientation == "landscape";
 
 		//RENDER

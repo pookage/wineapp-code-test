@@ -23,8 +23,6 @@ function reducer(state, action){
 		value
 	} = action;
 
-
-
 	switch(type){
 		case ACTIONS.UPDATE_WINES:
 			return {
@@ -63,6 +61,7 @@ function reducer(state, action){
 			};
 
 		default:
+			console.error(`Action: ${type} does not exist in the <Wine> context.`);
 			return { ...state };
 	}
 
@@ -72,7 +71,7 @@ function WineProvider(props){
 
 	//HOOKS
 	//----------------------
-	const [ state, dispatch ]         = useReducer(reducer, initialState);
+	const [ state, dispatch ]     = useReducer(reducer, initialState);
 	const { filters, activeWine } = state;
 
 	useEffect(syncWinesByColorFilter, [ filters.color ]);
@@ -94,13 +93,7 @@ function WineProvider(props){
 	}//syncWinesByColorFilter
 	function syncWineDetails(){
 		if(activeWine.id){
-			updateWineDetails(activeWine.id);
-			
-		} else {
-			// dispatchRoute({
-			// 	type: ACTIONS.SET_ACTIVE_PAGE,
-			// 	value: "list"
-			// });
+			updateWineDetails(activeWine.id);	
 		}
 	}//syncWineDetails
 
@@ -116,15 +109,10 @@ function WineProvider(props){
 	}//updateWineList
 	async function updateWineDetails(id){
 		const details = await fetchWineDetails(id);
-
 		dispatch({
 			type: ACTIONS.SET_ACTIVE_WINE_DETAILS,
 			value: details
 		});
-		// dispatchRoute({
-		// 	type: ACTIONS.SET_ACTIVE_PAGE,
-		// 	value: "details"
-		// });
 	}//updateWineDetails
 
 	

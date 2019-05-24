@@ -35,6 +35,7 @@
 
 These are some features that I would have like to have added, but had to cut due to time constraints.
 
+- Add a UI for more advanced filters
 - Scroll the active page no. in the pagination to the center when changed.
 - Trap the tab focus to only elements inside the active page
 - Include the currency system as part of the `<Client>` context rather than recalculate in every instance.

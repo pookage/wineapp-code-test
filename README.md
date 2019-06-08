@@ -1,4 +1,4 @@
-# WineApp Code-Test 🍷
+# WineApp 🍷
 
 ## Building the App...
 
